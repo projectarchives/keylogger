@@ -10,6 +10,8 @@ import pro.jrat.api.stub.StubPlugin;
 
 public class Plugin extends StubPlugin {
 	
+	public static final List<Activity> activities = new ArrayList<Activity>();
+	
 	public static DataInputStream dis;
 	public static DataOutputStream dos;
 	public static boolean enabled;
