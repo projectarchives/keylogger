@@ -13,11 +13,12 @@ public class Activities {
 	}
 	
 	public static void pump(DataOutputStream out) throws Exception {
-		out.writeByte(Plugin.STATUS_HEADER);
+		//out.writeByte(Plugin.STATUS_HEADER);
 		
 		int size = activities.size();
 		
 		out.writeInt(size);
+		System.out.println("Wrote length: " + size);
 		
 		for (int i = 0; i < size; i++) {
 			activities.remove(i).write(out);

@@ -55,8 +55,8 @@ public class Plugin extends StubPlugin {
 	
 	public void onPacket(byte header) throws Exception {
 		if (header == STATUS_HEADER) {
-			
-			
+			System.out.println("OnPacket: " + header);
+			Activities.pump(dos);		
 		}
 	}
 	
