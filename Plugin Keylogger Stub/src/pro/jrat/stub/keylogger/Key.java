@@ -4,9 +4,17 @@ import java.io.DataOutputStream;
 
 public class Key implements Activity {
 
+	private final char key;
+
+	public Key(char key) {
+		this.key = key;
+	}
+
 	@Override
-	public void write(DataOutputStream dos) {
-		
+	public void write(DataOutputStream dos) throws Exception {
+		dos.writeByte(Plugin.KEY_HEADER);
+
+		dos.writeChar(key);
 	}
 
 }
