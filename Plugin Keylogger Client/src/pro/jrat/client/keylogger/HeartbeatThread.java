@@ -2,21 +2,22 @@ package pro.jrat.client.keylogger;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.util.Random;
 
 import pro.jrat.api.PacketBuilder;
 import pro.jrat.api.RATObject;
 
 public class HeartbeatThread implements Runnable {
 
-	private boolean enabled = true;
-
+	private boolean enabled;
 	private RATObject server;
-	private PanelKeylogger panel;
 
-	public HeartbeatThread(RATObject server, PanelKeylogger panel) {
+	public HeartbeatThread(RATObject server) {
 		this.server = server;
-		this.panel = panel;
+		this.enabled = true;
+	}
+	
+	public void toggle() {
+		enabled = !enabled;
 	}
 
 	@Override
@@ -24,6 +25,10 @@ public class HeartbeatThread implements Runnable {
 		while (enabled) {
 			try {
 				Thread.sleep(1000L);
+				
+				if (!enabled) {
+					break;
+				}
 
 				server.addToSendQueue(new PacketBuilder(Plugin.STATUS_HEADER, server) {
 					@Override
