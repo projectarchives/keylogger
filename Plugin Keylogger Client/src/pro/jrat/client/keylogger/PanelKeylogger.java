@@ -3,8 +3,6 @@ package pro.jrat.client.keylogger;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
@@ -19,8 +17,6 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 
 import pro.jrat.api.BaseControlPanel;
-import pro.jrat.api.PacketBuilder;
-import pro.jrat.api.RATObject;
 
 
 @SuppressWarnings("serial")

