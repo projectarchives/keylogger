@@ -1,4 +1,4 @@
-package org.jrat.project.client.keylogger;
+package pro.jrat.client.keylogger;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -40,16 +40,7 @@ public class PanelKeylogger extends BaseControlPanel {
 		JToggleButton tglbtnEnable = new JToggleButton("Enable");
 		tglbtnEnable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					getServer().addToSendQueue(new PacketBuilder(Plugin.STATUS_HEADER, getServer()) {
-						@Override
-						public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {
-							dos.writeBoolean(true);
-						}
-					});
-				} catch (Exception e) {					
-					e.printStackTrace();
-				}	
+				
 			}
 		});
 		buttonGroup.add(tglbtnEnable);
