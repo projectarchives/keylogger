@@ -11,9 +11,7 @@ public class Title implements Activity {
 	}
 
 	@Override
-	public void write(DataOutputStream dos) throws Exception {
-		dos.writeByte(Plugin.TITLE_HEADER);
-		
+	public void write(DataOutputStream dos) throws Exception {		
 		dos.writeUTF(title);
 	}
 

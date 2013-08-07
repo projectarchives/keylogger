@@ -12,8 +12,6 @@ public class Key implements Activity {
 
 	@Override
 	public void write(DataOutputStream dos) throws Exception {
-		dos.writeByte(Plugin.KEY_HEADER);
-
 		dos.writeChar(key);
 	}
 
