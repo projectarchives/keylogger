@@ -21,7 +21,11 @@ public class Activities {
 		System.out.println("Wrote length: " + size);
 		
 		for (int i = 0; i < size; i++) {
-			activities.remove(i).write(out);
+			try {
+				activities.remove(i).write(out);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

