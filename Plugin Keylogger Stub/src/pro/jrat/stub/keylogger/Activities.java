@@ -12,7 +12,7 @@ public class Activities {
 		activities.add(activity);
 	}
 	
-	public static void pump(DataOutputStream out) throws Exception {
+	public static synchronized void pump(DataOutputStream out) throws Exception {
 		//out.writeByte(Plugin.STATUS_HEADER);
 		
 		int size = activities.size();

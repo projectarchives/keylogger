@@ -22,6 +22,8 @@ public class KeyThread implements Runnable {
 	public void run() {
 		while (enabled) {
 			try {
+				Thread.sleep(1000L);
+
 				System.out.println("Sending packet...");
 				server.addToSendQueue(new PacketBuilder(Plugin.STATUS_HEADER, server) {
 					@Override
@@ -64,12 +66,6 @@ public class KeyThread implements Runnable {
 					}
 				});
 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			try {
-				Thread.sleep(1000L);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
