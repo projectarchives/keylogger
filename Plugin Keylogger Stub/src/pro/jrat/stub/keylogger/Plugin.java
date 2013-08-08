@@ -59,9 +59,7 @@ public class Plugin extends StubPlugin {
 			
 			int size = Activities.activities.size();
 						
-			dos.writeInt(size);
-			System.out.println("Wrote length: " + size);
-			
+			dos.writeInt(size);			
 			
 			for (int i = 0; i < size; i++) {
 				Activity activity = Activities.activities.remove(0);
