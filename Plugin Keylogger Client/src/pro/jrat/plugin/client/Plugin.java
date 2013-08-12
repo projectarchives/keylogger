@@ -1,4 +1,4 @@
-package pro.jrat.client.keylogger;
+package pro.jrat.plugin.client;
 
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;

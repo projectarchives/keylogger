@@ -1,4 +1,4 @@
-package pro.jrat.stub.keylogger;
+package pro.jrat.plugin.stub;
 
 import java.util.ArrayList;
 import java.util.List;
