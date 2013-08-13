@@ -10,7 +10,7 @@ public class Activities {
 
 	public static synchronized void add(Activity activity) {
 		if (activity instanceof Key && unix && activities.size() > 0 && ((Key)activities.get(activities.size() - 1)).getKey() == (((Key)activity).getKey())) {
-			return;
+			//return;
 		}
 		activities.add(activity);
 	}

