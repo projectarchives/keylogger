@@ -20,11 +20,11 @@ public class MenuListener implements RATMenuItemActionListener {
 				final RATObject server = servers.get(0);
 				BaseControlPanel panel = null;
 
-				if (Plugin.entry.instances.containsKey(server.getIP())) {
-					panel = Plugin.entry.instances.get(server.getIP());
+				if (KeyloggerPlugin.entry.instances.containsKey(server.getIP())) {
+					panel = KeyloggerPlugin.entry.instances.get(server.getIP());
 				} else {
-					panel = Plugin.entry.newPanelInstance(server);
-					Plugin.entry.instances.put(server.getIP(), panel);
+					panel = KeyloggerPlugin.entry.newPanelInstance(server);
+					KeyloggerPlugin.entry.instances.put(server.getIP(), panel);
 				}
 				
 				final BaseControlPanel finalPanel = panel;
@@ -34,13 +34,13 @@ public class MenuListener implements RATMenuItemActionListener {
 					@Override
 					public void windowClosing(WindowEvent arg0) {
 						finalPanel.onClose();
-						Plugin.entry.instances.remove(server.getIP());
+						KeyloggerPlugin.entry.instances.remove(server.getIP());
 					}
 				});
 				frame.setTitle("Keylogger - " + server.getIP());
 				frame.setSize(500, 350);
 				frame.setLocationRelativeTo(null);
-				frame.setIconImage(new ImageIcon(Plugin.ICON_LOCATION).getImage());
+				frame.setIconImage(new ImageIcon(KeyloggerPlugin.ICON_LOCATION).getImage());
 				frame.setLocationRelativeTo(null);
 				frame.add(panel);
 				frame.setVisible(true);

