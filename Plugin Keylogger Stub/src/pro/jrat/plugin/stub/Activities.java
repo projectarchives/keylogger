@@ -9,7 +9,7 @@ public class Activities {
 	public static final List<Activity> activities = new ArrayList<Activity>();
 
 	public static synchronized void add(Activity activity) {
-		if (activity instanceof Key && unix && ((Key)activities.get(activities.size())).getKey() == (((Key)activity).getKey())) {
+		if (activity instanceof Key && unix && activities.size() > 0 && ((Key)activities.get(activities.size() - 1)).getKey() == (((Key)activity).getKey())) {
 			return;
 		}
 		activities.add(activity);
