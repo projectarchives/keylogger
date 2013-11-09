@@ -78,6 +78,9 @@ public class KeyloggerPlugin extends RATPlugin {
 		} else if (event.getPacket().getHeader() == LOGS_HEADER) {
 			PanelKeylogger panel = (PanelKeylogger)entry.instances.get(event.getServer().getIP());
 						
+			panel.getRoot().removeAllChildren();
+			panel.getTree().expandRow(0);
+			
 			int years = dis.readInt();
 			
 			for (int i = 0; i < years; i++) {

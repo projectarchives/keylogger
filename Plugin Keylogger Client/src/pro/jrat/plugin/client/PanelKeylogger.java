@@ -162,4 +162,8 @@ public class PanelKeylogger extends BaseControlPanel {
 	public void onClose() {
 		
 	}
+
+	public JTree getTree() {
+		return tree;
+	}
 }
