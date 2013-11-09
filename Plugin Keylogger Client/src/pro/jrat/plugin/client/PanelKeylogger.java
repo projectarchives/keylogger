@@ -17,6 +17,9 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 
 import pro.jrat.api.BaseControlPanel;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 
 @SuppressWarnings("serial")
@@ -27,6 +30,7 @@ public class PanelKeylogger extends BaseControlPanel {
 	private JCheckBox chckbxDeleteCharOn;
 	private Style title;
 	private HeartbeatThread hb;
+	private JTree tree;
 
 	public PanelKeylogger() {
 		
@@ -54,10 +58,11 @@ public class PanelKeylogger extends BaseControlPanel {
 		tglbtnDisable.setSelected(true);
 		
 		chckbxDeleteCharOn = new JCheckBox("Delete char on backspace");
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(tglbtnEnable)
@@ -65,12 +70,19 @@ public class PanelKeylogger extends BaseControlPanel {
 					.addComponent(tglbtnDisable)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(chckbxDeleteCharOn)
-					.addContainerGap(199, Short.MAX_VALUE))
+					.addContainerGap(147, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addGap(1)
+					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+						.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(tglbtnEnable)
@@ -79,6 +91,16 @@ public class PanelKeylogger extends BaseControlPanel {
 					.addGap(12))
 		);
 		
+		tree = new JTree();
+		tree.setShowsRootHandles(true);
+		tree.setModel(new DefaultTreeModel(
+			new DefaultMutableTreeNode("Dates") {
+				{
+				}
+			}
+		));
+		scrollPane_1.setViewportView(tree);
+		
 		textPane = new JTextPane();
 		textPane.setEditable(false);
 		scrollPane.setViewportView(textPane);
@@ -86,6 +108,10 @@ public class PanelKeylogger extends BaseControlPanel {
 
 		title = textPane.addStyle("title", null);
         StyleConstants.setForeground(title, Color.green.darker());
+	}
+	
+	public DefaultMutableTreeNode getRoot() {
+		return (DefaultMutableTreeNode) tree.getModel().getRoot();
 	}
 	
 	public synchronized void delete() throws Exception {
