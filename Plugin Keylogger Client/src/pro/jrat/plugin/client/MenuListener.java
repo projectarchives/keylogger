@@ -41,7 +41,7 @@ public class MenuListener implements RATMenuItemActionListener {
 					}
 				});
 				frame.setTitle("Keylogger - " + server.getIP());
-				frame.setSize(500, 350);
+				frame.setSize(750, 400);
 				frame.setLocationRelativeTo(null);
 				frame.setIconImage(new ImageIcon(KeyloggerPlugin.ICON_LOCATION).getImage());
 				frame.setLocationRelativeTo(null);

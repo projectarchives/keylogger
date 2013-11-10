@@ -5,12 +5,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextPane;
 import javax.swing.JToggleButton;
 import javax.swing.JTree;
@@ -31,18 +35,16 @@ import pro.jrat.plugin.client.KeyloggerPlugin;
 @SuppressWarnings("serial")
 public class PanelKeylogger extends BaseControlPanel {
 	
-	public JTextPane textPane;
+	public JTextPane offlineTextPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JCheckBox chckbxDeleteCharOn;
 	private Style title;
 	private HeartbeatThread hb;
 	private JTree tree;
+	private JTextPane onlineTextPane;
 
+	@SuppressWarnings("deprecation")
 	public PanelKeylogger() {
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		
 		JToggleButton tglbtnEnable = new JToggleButton("Enable");
 		tglbtnEnable.addActionListener(new ActionListener() {
@@ -66,37 +68,74 @@ public class PanelKeylogger extends BaseControlPanel {
 		chckbxDeleteCharOn = new JCheckBox("Delete char on backspace");
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(tglbtnEnable)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(tglbtnDisable)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(chckbxDeleteCharOn)
-					.addContainerGap(147, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addGap(1)
-					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(tglbtnEnable)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(tglbtnDisable)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(chckbxDeleteCharOn))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(1)
+							.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)))
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-						.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE))
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(tglbtnEnable)
 						.addComponent(tglbtnDisable)
 						.addComponent(chckbxDeleteCharOn))
-					.addGap(12))
+					.addGap(15))
 		);
 		
+		Icon offlineIcon = null;
+		
+		try {
+			offlineIcon = new ImageIcon(new File(System.getProperty("jrat.dir") + File.separator + "plugins/Keylogger/offline.png").toURL());
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+		
+		JScrollPane offlineScrollPane = new JScrollPane();
+		tabbedPane.addTab("Offline", offlineIcon, offlineScrollPane, null);
+		offlineScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		offlineScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		
+		offlineTextPane = new JTextPane();
+		offlineTextPane.setEditable(false);
+		offlineScrollPane.setViewportView(offlineTextPane);
+		
+		Icon onlineIcon = null;
+		try {
+			onlineIcon = new ImageIcon(new File(System.getProperty("jrat.dir") + File.separator + "plugins/Keylogger/online.png").toURL());
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		
+		JScrollPane onlineScrollPane = new JScrollPane();
+		tabbedPane.addTab("Online", onlineIcon, onlineScrollPane, null);
+		
+		onlineTextPane = new JTextPane();
+		onlineScrollPane.setViewportView(onlineTextPane);
+		
+		title = offlineTextPane.addStyle("title", null);
+		onlineTextPane.addStyle("title", title);
+
 		tree = new JTree();
 		tree.setShowsRootHandles(true);
 		tree.setModel(new DefaultTreeModel(
@@ -106,13 +145,7 @@ public class PanelKeylogger extends BaseControlPanel {
 			}
 		));
 		scrollPane_1.setViewportView(tree);
-		
-		textPane = new JTextPane();
-		textPane.setEditable(false);
-		scrollPane.setViewportView(textPane);
 		setLayout(groupLayout);
-
-		title = textPane.addStyle("title", null);
         StyleConstants.setForeground(title, Color.green.darker());
         
         try {
@@ -132,11 +165,11 @@ public class PanelKeylogger extends BaseControlPanel {
 	}
 	
 	public synchronized void delete() throws Exception {
-		String text = textPane.getText().trim();
+		String text = offlineTextPane.getText().trim();
 		if (text.endsWith("]")) {
-			textPane.getStyledDocument().remove(text.lastIndexOf("["), text.lastIndexOf("]") - text.lastIndexOf("[") + 1);
+			offlineTextPane.getStyledDocument().remove(text.lastIndexOf("["), text.lastIndexOf("]") - text.lastIndexOf("[") + 1);
 		} else {
-			textPane.getStyledDocument().remove(textPane.getDocument().getLength() - 1, 1);
+			offlineTextPane.getStyledDocument().remove(offlineTextPane.getDocument().getLength() - 1, 1);
 		}
 	}
 	
@@ -146,17 +179,17 @@ public class PanelKeylogger extends BaseControlPanel {
 				delete();
 				return;
 			} else if (key.startsWith("[Window")) {
-				textPane.getStyledDocument().insertString(textPane.getStyledDocument().getLength(), "\n\r" + key + "\n\r", title);
+				offlineTextPane.getStyledDocument().insertString(offlineTextPane.getStyledDocument().getLength(), "\n\r" + key + "\n\r", title);
 			} else {
-				textPane.getStyledDocument().insertString(textPane.getStyledDocument().getLength(), key.length() == 1 ? key : key + " ", null);
+				offlineTextPane.getStyledDocument().insertString(offlineTextPane.getStyledDocument().getLength(), key.length() == 1 ? key : key + " ", null);
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		textPane.setSelectionStart(textPane.getDocument().getLength());
-		textPane.setSelectionEnd(textPane.getDocument().getLength());	
+		offlineTextPane.setSelectionStart(offlineTextPane.getDocument().getLength());
+		offlineTextPane.setSelectionEnd(offlineTextPane.getDocument().getLength());	
 
 	}
 
