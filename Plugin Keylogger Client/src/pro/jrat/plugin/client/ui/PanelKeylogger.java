@@ -1,4 +1,4 @@
-package pro.jrat.plugin.client;
+package pro.jrat.plugin.client.ui;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -24,6 +24,8 @@ import javax.swing.tree.DefaultTreeModel;
 import pro.jrat.api.BaseControlPanel;
 import pro.jrat.api.PacketBuilder;
 import pro.jrat.api.RATObject;
+import pro.jrat.plugin.client.HeartbeatThread;
+import pro.jrat.plugin.client.KeyloggerPlugin;
 
 
 @SuppressWarnings("serial")

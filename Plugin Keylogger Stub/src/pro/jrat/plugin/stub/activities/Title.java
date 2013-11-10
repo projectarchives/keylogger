@@ -1,6 +1,7 @@
-package pro.jrat.plugin.stub;
+package pro.jrat.plugin.stub.activities;
 
 import java.io.DataOutputStream;
+
 
 public class Title implements Activity {
 	

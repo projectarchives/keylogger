@@ -18,6 +18,7 @@ import pro.jrat.api.events.OnDisconnectEvent;
 import pro.jrat.api.events.OnEnableEvent;
 import pro.jrat.api.events.OnPacketEvent;
 import pro.jrat.api.events.OnSendPacketEvent;
+import pro.jrat.plugin.client.ui.PanelKeylogger;
 
 public class KeyloggerPlugin extends RATPlugin {
 
