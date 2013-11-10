@@ -14,5 +14,10 @@ public class Title implements Activity {
 	public void write(DataOutputStream dos) throws Exception {		
 		dos.writeUTF(title);
 	}
+	
+	@Override
+	public String toString() {
+		return title;
+	}
 
 }
