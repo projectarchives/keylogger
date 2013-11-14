@@ -167,8 +167,20 @@ public class PanelKeylogger extends BaseControlPanel {
 		}
 	}
 	
-	public void setOfflineLog(String log) {
-		offlineTextPane.setText(log);
+	public void appendOffline(String key) {
+		try {
+			if (key.equals("[BACKSPACE]") && chckbxDeleteCharOn.isSelected()) {
+				delete();
+				return;
+			} else if (key.startsWith("[Window:")) {
+				offlineTextPane.getStyledDocument().insertString(offlineTextPane.getStyledDocument().getLength(), "\n\r" + key + "\n\r", title);
+			} else {
+				offlineTextPane.getStyledDocument().insertString(offlineTextPane.getStyledDocument().getLength(), key.length() == 1 ? key : key + " ", null);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public synchronized void appendOnline(String key) {

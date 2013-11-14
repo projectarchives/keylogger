@@ -15,7 +15,7 @@ public class Activities {
 			return;
 		}*/		
 				
-		if (activity instanceof Key && ((Key)activity).getChar() != '\b') {
+		if (!(activity instanceof Key) || activity instanceof Key && ((Key)activity).getChar() != '\b') {
 			activities.add(activity);
 		}
 		

