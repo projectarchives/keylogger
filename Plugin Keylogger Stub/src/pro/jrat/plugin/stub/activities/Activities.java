@@ -14,9 +14,7 @@ public class Activities {
 		/*if (activity instanceof Key && unix && activities.size() > 0 && ((Key)activities.get(activities.size() - 1)).getKey() == (((Key)activity).getKey())) {
 			return;
 		}*/		
-		
-		System.out.println(activity instanceof Key && ((Key)activity).getChar() == '\b');
-		
+				
 		if (activity instanceof Key && ((Key)activity).getChar() != '\b') {
 			activities.add(activity);
 		}
