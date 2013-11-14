@@ -35,7 +35,7 @@ import pro.jrat.plugin.client.KeyloggerPlugin;
 
 @SuppressWarnings("serial")
 public class PanelKeylogger extends BaseControlPanel {
-
+	
 	public JTextPane offlineTextPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JCheckBox chckbxDeleteCharOn;
@@ -105,6 +105,7 @@ public class PanelKeylogger extends BaseControlPanel {
 		tabbedPane.addTab("Online", onlineIcon, onlineScrollPane, null);
 
 		onlineTextPane = new JTextPane();
+		onlineTextPane.setEditable(false);
 		onlineScrollPane.setViewportView(onlineTextPane);
 
 		title = offlineTextPane.addStyle("title", null);

