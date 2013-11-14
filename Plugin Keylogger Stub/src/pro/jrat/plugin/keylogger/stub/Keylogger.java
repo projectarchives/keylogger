@@ -1,4 +1,4 @@
-package pro.jrat.plugin.stub;
+package pro.jrat.plugin.keylogger.stub;
 
 import java.io.File;
 import java.util.Date;
@@ -6,9 +6,9 @@ import java.util.Date;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
-import pro.jrat.plugin.stub.activities.Activities;
-import pro.jrat.plugin.stub.activities.Key;
-import pro.jrat.plugin.stub.codec.Base64;
+import pro.jrat.plugin.keylogger.stub.activities.Activities;
+import pro.jrat.plugin.keylogger.stub.activities.Key;
+import pro.jrat.plugin.keylogger.stub.codec.Base64;
 
 @SuppressWarnings("deprecation")
 public class Keylogger implements NativeKeyListener {

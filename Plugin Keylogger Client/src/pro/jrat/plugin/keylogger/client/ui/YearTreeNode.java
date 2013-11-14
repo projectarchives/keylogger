@@ -1,4 +1,4 @@
-package pro.jrat.plugin.client.ui;
+package pro.jrat.plugin.keylogger.client.ui;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 

