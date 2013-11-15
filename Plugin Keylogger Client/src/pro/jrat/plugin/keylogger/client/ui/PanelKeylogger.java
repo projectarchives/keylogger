@@ -39,7 +39,10 @@ public class PanelKeylogger extends BaseControlPanel {
 	public JTextPane offlineTextPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JCheckBox chckbxDeleteCharOn;
+	
 	private Style title;
+	private Style date;
+
 	private HeartbeatThread hb;
 	private JTree tree;
 	private JTextPane onlineTextPane;
@@ -110,6 +113,11 @@ public class PanelKeylogger extends BaseControlPanel {
 
 		title = offlineTextPane.addStyle("title", null);
 		onlineTextPane.addStyle("title", title);
+		StyleConstants.setForeground(title, Color.green.darker());
+		
+		date = offlineTextPane.addStyle("date", null);
+		onlineTextPane.addStyle("date", date);
+		StyleConstants.setForeground(date, Color.blue);
 
 		tree = new JTree();
 		tree.addTreeSelectionListener(new TreeSelectionListener() {
@@ -140,7 +148,6 @@ public class PanelKeylogger extends BaseControlPanel {
 		tree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Dates")));
 		scrollPane_1.setViewportView(tree);
 		setLayout(groupLayout);
-		StyleConstants.setForeground(title, Color.green.darker());
 
 		try {
 			getServer().addToSendQueue(new PacketBuilder(ClientPlugin.LOGS_HEADER, getServer()) {
@@ -174,6 +181,8 @@ public class PanelKeylogger extends BaseControlPanel {
 				return;
 			} else if (key.startsWith("[Window:")) {
 				offlineTextPane.getStyledDocument().insertString(offlineTextPane.getStyledDocument().getLength(), "\n\r" + key + "\n\r", title);
+			} else if (key.startsWith("[Date:")) {
+				offlineTextPane.getStyledDocument().insertString(offlineTextPane.getStyledDocument().getLength(), "\n\r" + key + "\n\r", date);
 			} else {
 				offlineTextPane.getStyledDocument().insertString(offlineTextPane.getStyledDocument().getLength(), key.length() == 1 ? key : key + " ", null);
 			}
@@ -188,8 +197,10 @@ public class PanelKeylogger extends BaseControlPanel {
 			if (key.equals("[BACKSPACE]") && chckbxDeleteCharOn.isSelected()) {
 				delete();
 				return;
-			} else if (key.startsWith("[Window")) {
+			} else if (key.startsWith("[Window:")) {
 				onlineTextPane.getStyledDocument().insertString(onlineTextPane.getStyledDocument().getLength(), "\n\r" + key + "\n\r", title);
+			} else if (key.startsWith("[Date:")) {
+				onlineTextPane.getStyledDocument().insertString(onlineTextPane.getStyledDocument().getLength(), "\n\r" + key + "\n\r", date);
 			} else {
 				onlineTextPane.getStyledDocument().insertString(onlineTextPane.getStyledDocument().getLength(), key.length() == 1 ? key : key + " ", null);
 			}
