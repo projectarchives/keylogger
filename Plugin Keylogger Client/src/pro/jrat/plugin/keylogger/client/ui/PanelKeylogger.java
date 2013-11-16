@@ -32,6 +32,11 @@ import pro.jrat.api.PacketBuilder;
 import pro.jrat.api.RATObject;
 import pro.jrat.plugin.keylogger.client.HeartbeatThread;
 import pro.jrat.plugin.keylogger.client.ClientPlugin;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JMenuItem;
 
 @SuppressWarnings("serial")
 public class PanelKeylogger extends BaseControlPanel {
@@ -74,6 +79,9 @@ public class PanelKeylogger extends BaseControlPanel {
 		JScrollPane scrollPane_1 = new JScrollPane();
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		
+		JPopupMenu popupMenu = new JPopupMenu();
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout.createSequentialGroup().addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout.createSequentialGroup().addContainerGap().addComponent(tglbtnEnable).addPreferredGap(ComponentPlacement.RELATED).addComponent(tglbtnDisable).addPreferredGap(ComponentPlacement.UNRELATED).addComponent(chckbxDeleteCharOn)).addGroup(groupLayout.createSequentialGroup().addGap(1).addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED).addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE))).addContainerGap()));
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout.createSequentialGroup().addGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE).addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)).addPreferredGap(ComponentPlacement.RELATED).addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(tglbtnEnable).addComponent(tglbtnDisable).addComponent(chckbxDeleteCharOn)).addGap(15)));
@@ -120,6 +128,16 @@ public class PanelKeylogger extends BaseControlPanel {
 		StyleConstants.setForeground(date, Color.blue);
 
 		tree = new JTree();
+		addPopup(tree, popupMenu);
+		
+		JMenuItem mntmReload = new JMenuItem("Reload");
+		mntmReload.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				reloadLogs();
+			}
+		});
+		
+		popupMenu.add(mntmReload);
 		tree.setCellRenderer(new TreeRenderer());
 		tree.addTreeSelectionListener(new TreeSelectionListener() {
 			public void valueChanged(TreeSelectionEvent event) {
@@ -150,7 +168,18 @@ public class PanelKeylogger extends BaseControlPanel {
 		scrollPane_1.setViewportView(tree);
 		setLayout(groupLayout);
 
+		reloadLogs();
+	}
+
+	public DefaultMutableTreeNode getRoot() {
+		return (DefaultMutableTreeNode) tree.getModel().getRoot();
+	}
+
+	public synchronized void reloadLogs() {
 		try {
+			
+			((DefaultMutableTreeNode)tree.getModel().getRoot()).removeAllChildren();
+			
 			getServer().addToSendQueue(new PacketBuilder(ClientPlugin.LOGS_HEADER, getServer()) {
 				@Override
 				public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {
@@ -161,11 +190,7 @@ public class PanelKeylogger extends BaseControlPanel {
 			e.printStackTrace();
 		}
 	}
-
-	public DefaultMutableTreeNode getRoot() {
-		return (DefaultMutableTreeNode) tree.getModel().getRoot();
-	}
-
+	
 	public synchronized void delete() throws Exception {
 		String text = offlineTextPane.getText().trim();
 		if (text.endsWith("]")) {
@@ -222,5 +247,22 @@ public class PanelKeylogger extends BaseControlPanel {
 
 	public JTree getTree() {
 		return tree;
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
 	}
 }
