@@ -141,7 +141,7 @@ public class ClientPlugin extends RATPlugin {
 	}
 
 	public String getVersion() {
-		return "1.0";
+		return "4.1.4 >";
 	}
 
 	public String getDescription() {

@@ -131,7 +131,7 @@ public class StubPlugin extends pro.jrat.api.stub.StubPlugin {
 	}
 
 	public String getVersion() {
-		return "1.0";
+		return "4.1.4 >";
 	}
 
 	@Override
