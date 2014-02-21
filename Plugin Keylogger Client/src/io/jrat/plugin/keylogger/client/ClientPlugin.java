@@ -1,4 +1,9 @@
-package pro.jrat.plugin.keylogger.client;
+package io.jrat.plugin.keylogger.client;
+
+import io.jrat.plugin.keylogger.client.ui.DayTreeNode;
+import io.jrat.plugin.keylogger.client.ui.MonthTreeNode;
+import io.jrat.plugin.keylogger.client.ui.PanelKeylogger;
+import io.jrat.plugin.keylogger.client.ui.YearTreeNode;
 
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
@@ -9,19 +14,15 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import pro.jrat.api.RATControlMenuEntry;
-import pro.jrat.api.RATMenuItem;
-import pro.jrat.api.RATPlugin;
-import pro.jrat.api.events.OnConnectEvent;
-import pro.jrat.api.events.OnDisableEvent;
-import pro.jrat.api.events.OnDisconnectEvent;
-import pro.jrat.api.events.OnEnableEvent;
-import pro.jrat.api.events.OnPacketEvent;
-import pro.jrat.api.events.OnSendPacketEvent;
-import pro.jrat.plugin.keylogger.client.ui.DayTreeNode;
-import pro.jrat.plugin.keylogger.client.ui.MonthTreeNode;
-import pro.jrat.plugin.keylogger.client.ui.PanelKeylogger;
-import pro.jrat.plugin.keylogger.client.ui.YearTreeNode;
+import jrat.api.RATControlMenuEntry;
+import jrat.api.RATMenuItem;
+import jrat.api.RATPlugin;
+import jrat.api.events.OnConnectEvent;
+import jrat.api.events.OnDisableEvent;
+import jrat.api.events.OnDisconnectEvent;
+import jrat.api.events.OnEnableEvent;
+import jrat.api.events.OnPacketEvent;
+import jrat.api.events.OnSendPacketEvent;
 
 public class ClientPlugin extends RATPlugin {
 

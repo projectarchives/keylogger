@@ -1,4 +1,4 @@
-package pro.jrat.plugin.keylogger.stub.codec;
+package io.jrat.plugin.keylogger.stub.codec;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

@@ -1,4 +1,4 @@
-package pro.jrat.plugin.keylogger.stub.activities;
+package io.jrat.plugin.keylogger.stub.activities;
 
 import java.io.DataOutputStream;
 import java.util.Date;

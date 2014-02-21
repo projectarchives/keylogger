@@ -1,8 +1,14 @@
-package pro.jrat.plugin.keylogger.client.ui;
+package io.jrat.plugin.keylogger.client.ui;
+
+import io.jrat.plugin.keylogger.client.ClientPlugin;
+import io.jrat.plugin.keylogger.client.HeartbeatThread;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -13,6 +19,8 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextPane;
@@ -27,16 +35,9 @@ import javax.swing.text.StyleConstants;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
-import pro.jrat.api.BaseControlPanel;
-import pro.jrat.api.PacketBuilder;
-import pro.jrat.api.RATObject;
-import pro.jrat.plugin.keylogger.client.HeartbeatThread;
-import pro.jrat.plugin.keylogger.client.ClientPlugin;
-import javax.swing.JPopupMenu;
-import java.awt.Component;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.JMenuItem;
+import jrat.api.BaseControlPanel;
+import jrat.api.PacketBuilder;
+import jrat.api.RATObject;
 
 @SuppressWarnings("serial")
 public class PanelKeylogger extends BaseControlPanel {
