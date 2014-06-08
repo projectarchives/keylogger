@@ -1,8 +1,4 @@
-package io.jrat.plugin.keylogger.stub;
-
-import io.jrat.plugin.keylogger.stub.activities.Activities;
-import io.jrat.plugin.keylogger.stub.activities.Key;
-import io.jrat.plugin.keylogger.stub.codec.Base64;
+package su.jrat.plugin.keylogger.stub;
 
 import java.io.File;
 import java.util.Date;
@@ -11,6 +7,10 @@ import jrat.api.stub.utils.OperatingSystem;
 
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
+
+import su.jrat.plugin.keylogger.stub.activities.Activities;
+import su.jrat.plugin.keylogger.stub.activities.Key;
+import su.jrat.plugin.keylogger.stub.codec.Base64;
 
 
 @SuppressWarnings("deprecation")

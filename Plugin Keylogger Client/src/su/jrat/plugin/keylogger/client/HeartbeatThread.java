@@ -1,4 +1,4 @@
-package io.jrat.plugin.keylogger.client;
+package su.jrat.plugin.keylogger.client;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

