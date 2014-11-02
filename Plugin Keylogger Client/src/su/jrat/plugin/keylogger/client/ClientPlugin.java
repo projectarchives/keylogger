@@ -25,7 +25,7 @@ import jrat.api.events.OnSendPacketEvent;
 
 public class ClientPlugin extends RATPlugin {
 
-	public static final String ICON_LOCATION = System.getProperty("jrat.dir") + File.separator + "plugins/Keylogger/icon.png";
+	public static final String ICON_LOCATION = System.getProperty("jrat.dir") + File.separator + "/files/plugins/Keylogger/icon.png";
 	public static final byte KEY_HEADER = 121;
 	public static final byte TITLE_HEADER = 122;
 	public static final byte STATUS_HEADER = 123;
