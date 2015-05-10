@@ -1,12 +1,13 @@
 package se.jrat.plugin.keylogger.client;
 
+import iconlib.IconUtils;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import jrat.api.BaseControlPanel;
@@ -23,11 +24,11 @@ public class MenuListener implements RATMenuItemActionListener {
 				final Client server = servers.get(0);
 				BaseControlPanel panel = null;
 
-				if (KeyloggerPlugin.entry.instances.containsKey(server.getIP())) {
-					panel = KeyloggerPlugin.entry.instances.get(server.getIP());
+				if (KeyloggerPlugin.entry.getInstances().containsKey(server.getIP())) {
+					panel = KeyloggerPlugin.entry.getInstances().get(server.getIP());
 				} else {
 					panel = KeyloggerPlugin.entry.newPanelInstance(server);
-					KeyloggerPlugin.entry.instances.put(server.getIP(), panel);
+					KeyloggerPlugin.entry.getInstances().put(server.getIP(), panel);
 				}
 				
 				final BaseControlPanel finalPanel = panel;
@@ -37,13 +38,13 @@ public class MenuListener implements RATMenuItemActionListener {
 					@Override
 					public void windowClosing(WindowEvent arg0) {
 						finalPanel.onClose();
-						KeyloggerPlugin.entry.instances.remove(server.getIP());
+						KeyloggerPlugin.entry.getInstances().remove(server.getIP());
 					}
 				});
 				frame.setTitle("Keylogger - " + server.getIP());
 				frame.setSize(750, 400);
 				frame.setLocationRelativeTo(null);
-				frame.setIconImage(new ImageIcon(KeyloggerPlugin.ICON_LOCATION).getImage());
+				frame.setIconImage(IconUtils.getIcon("icon", MenuListener.class).getImage());
 				frame.setLocationRelativeTo(null);
 				frame.add(panel);
 				frame.setVisible(true);
