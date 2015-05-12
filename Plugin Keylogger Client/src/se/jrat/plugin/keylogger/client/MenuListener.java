@@ -18,17 +18,17 @@ import jrat.api.ui.RATMenuItemActionListener;
 public class MenuListener implements RATMenuItemActionListener {
 
 	@Override
-	public void onClick(List<Client> servers) {
+	public void onClick(List<Client> clients) {
 		try {
-			if (servers.size() > 0) {
-				final Client server = servers.get(0);
+			if (clients.size() > 0) {
+				final Client client = clients.get(0);
 				BaseControlPanel panel = null;
 
-				if (KeyloggerPlugin.entry.getInstances().containsKey(server.getIP())) {
-					panel = KeyloggerPlugin.entry.getInstances().get(server.getIP());
+				if (KeyloggerPlugin.entry.getInstances().containsKey(client.getIP())) {
+					panel = KeyloggerPlugin.entry.getInstances().get(client.getIP());
 				} else {
-					panel = KeyloggerPlugin.entry.newPanelInstance(server);
-					KeyloggerPlugin.entry.getInstances().put(server.getIP(), panel);
+					panel = KeyloggerPlugin.entry.newPanelInstance(client);
+					KeyloggerPlugin.entry.getInstances().put(client.getIP(), panel);
 				}
 				
 				final BaseControlPanel finalPanel = panel;
@@ -38,10 +38,10 @@ public class MenuListener implements RATMenuItemActionListener {
 					@Override
 					public void windowClosing(WindowEvent arg0) {
 						finalPanel.onClose();
-						KeyloggerPlugin.entry.getInstances().remove(server.getIP());
+						KeyloggerPlugin.entry.getInstances().remove(client.getIP());
 					}
 				});
-				frame.setTitle("Keylogger - " + server.getIP());
+				frame.setTitle("Keylogger - " + client.getIP());
 				frame.setSize(750, 400);
 				frame.setLocationRelativeTo(null);
 				frame.setIconImage(IconUtils.getIcon("icon", MenuListener.class).getImage());
@@ -50,7 +50,7 @@ public class MenuListener implements RATMenuItemActionListener {
 				frame.setVisible(true);
 				
 				try {
-					server.addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOGS_HEADER, server) {
+					client.addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOGS_HEADER, client) {
 						@Override
 						public void write(Client rat, DataOutputStream dos, DataInputStream dis) throws Exception {						
 							

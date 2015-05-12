@@ -51,6 +51,7 @@ public class PanelKeylogger extends BaseControlPanel {
 	private HeartbeatThread hb;
 	private JTree tree;
 	private JTextPane onlineTextPane;
+	private DefaultMutableTreeNode root;
 
 	@SuppressWarnings("deprecation")
 	public PanelKeylogger(Client client) {
@@ -164,7 +165,8 @@ public class PanelKeylogger extends BaseControlPanel {
 			}
 		});
 		tree.setShowsRootHandles(true);
-		tree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Logs")));
+		root = new DefaultMutableTreeNode("Logs");
+		tree.setModel(new DefaultTreeModel(root));
 		scrollPane_1.setViewportView(tree);
 		setLayout(groupLayout);
 
@@ -172,7 +174,7 @@ public class PanelKeylogger extends BaseControlPanel {
 	}
 
 	public DefaultMutableTreeNode getRoot() {
-		return (DefaultMutableTreeNode) tree.getModel().getRoot();
+		return root;
 	}
 
 	public synchronized void reloadLogs() {

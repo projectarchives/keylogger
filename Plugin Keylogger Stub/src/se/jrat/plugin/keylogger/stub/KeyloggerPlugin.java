@@ -36,7 +36,7 @@ public class KeyloggerPlugin extends jrat.api.stub.StubPlugin {
 	public static final byte LOG_HEADER = 125;
 	
 	public void onEnable() throws Exception {
-		
+
 	}
 
 	public void onDisconnect(Exception ex) {
