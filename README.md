@@ -9,6 +9,14 @@ Cross platform Key Stroke Capture Plugin which both works live and offline, sort
 | Description   | Keylogger Plugin
 | Version		| 1.0
 
+## Packets
+
+| Packet Name	| Header
+| ---           |:---
+| STATUS		| 123
+| LOGS			| 124
+| LOG			| 125
+
 ## Dependencies
 
 - Client
