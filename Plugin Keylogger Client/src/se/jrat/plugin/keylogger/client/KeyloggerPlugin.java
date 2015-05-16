@@ -18,7 +18,7 @@ public class KeyloggerPlugin extends Plugin {
 	public boolean enabled;
 
 	public KeyloggerPlugin() {
-		super("Keylogger", "1.0", "Keylogger Plugin", "jRAT");
+		super("Keylogger", "1.0", "Keylogger Plugin", "jRAT", IconUtils.getIcon("icon", KeyloggerPlugin.class));
 		
 		entry = new RATControlMenuEntry("Keylogger", IconUtils.getIcon("icon", KeyloggerPlugin.class), PanelKeylogger.class);
 		RATControlMenuEntry.addEntry(entry);
