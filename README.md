@@ -7,7 +7,7 @@ Cross platform Key Stroke Capture Plugin which both works live and offline, sort
 | Name			| Keylogger
 | Author     	| jRAT
 | Description   | Keylogger Plugin
-| Version		| 1.0
+| Version		| 1.1
 
 ## Packets
 
