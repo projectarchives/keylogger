@@ -26,5 +26,4 @@ Cross platform Key Stroke Capture Plugin which both works live and offline, sort
 - Stub
 	- [Stub API](https://github.com/java-rat/jrat-stub-api)
 	- [JNativeHook](https://github.com/kwhat/jnativehook)
-	- [jna](https://github.com/twall/jna) (If we want to show current window, Windows only)
 	- [nativewindowlib](https://github.com/redpois0n/nativewindowlib)
