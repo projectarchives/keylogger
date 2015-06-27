@@ -21,7 +21,6 @@ Cross platform Key Stroke Capture Plugin which both works live and offline, sort
 
 - Client
 	- [API](https://github.com/java-rat/jrat-api)
-	- [iconlib](https://github.com/redpois0n/iconlib)
 
 - Stub
 	- [Stub API](https://github.com/java-rat/jrat-stub-api)
