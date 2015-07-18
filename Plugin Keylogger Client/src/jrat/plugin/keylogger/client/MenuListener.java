@@ -2,15 +2,12 @@ package jrat.plugin.keylogger.client;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.util.List;
 
 import javax.swing.JFrame;
 
 import jrat.api.Client;
 import jrat.api.Icons;
-import jrat.api.net.PacketBuilder;
 import jrat.api.ui.BaseControlPanel;
 import jrat.api.ui.RATMenuItemActionListener;
 
@@ -41,7 +38,7 @@ public class MenuListener implements RATMenuItemActionListener {
 				frame.setTitle("Keylogger - " + client.getIP());
 				frame.setSize(750, 400);
 				frame.setLocationRelativeTo(null);
-				frame.setIconImage(Icons.getIcon("Keylogger", "icon").getImage());
+				frame.setIconImage(Icons.getIcon("Keylogger", "/icons/icon.png").getImage());
 				frame.setLocationRelativeTo(null);
 				frame.add(panel);
 				frame.setVisible(true);

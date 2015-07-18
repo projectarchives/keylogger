@@ -8,13 +8,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.File;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -33,6 +31,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 import jrat.api.Client;
+import jrat.api.Icons;
 import jrat.api.net.PacketBuilder;
 import jrat.api.ui.BaseControlPanel;
 import jrat.plugin.keylogger.client.HeartbeatThread;
@@ -53,7 +52,6 @@ public class PanelKeylogger extends BaseControlPanel {
 	private JTextPane onlineTextPane;
 	private DefaultMutableTreeNode root;
 
-	@SuppressWarnings("deprecation")
 	public PanelKeylogger(Client client) {
 		super(client);
 		JToggleButton tglbtnEnable = new JToggleButton("Enable");
@@ -90,7 +88,7 @@ public class PanelKeylogger extends BaseControlPanel {
 		Icon offlineIcon = null;
 
 		try {
-			offlineIcon = new ImageIcon(new File(System.getProperty("jrat.dir") + File.separator + "plugins/Keylogger/offline.png").toURL());
+			offlineIcon = Icons.getIcon("Keylogger", "/icons/offline.png");
 		} catch (Exception e2) {
 			e2.printStackTrace();
 		}
@@ -106,7 +104,7 @@ public class PanelKeylogger extends BaseControlPanel {
 
 		Icon onlineIcon = null;
 		try {
-			onlineIcon = new ImageIcon(new File(System.getProperty("jrat.dir") + File.separator + "plugins/Keylogger/online.png").toURL());
+			onlineIcon = Icons.getIcon("Keylogger", "/icons/online.png");
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
