@@ -27,8 +27,9 @@ public class PacketLog extends PacketListener {
 						panel.appendOffline(builder.toString());
 					}
 				} else {
+					String str = client.getDataInputStream().readUTF();
 					if (panel != null) {
-						panel.appendOffline(client.getDataInputStream().readUTF());
+						panel.appendOffline(str);
 					}
 				}
 			}
