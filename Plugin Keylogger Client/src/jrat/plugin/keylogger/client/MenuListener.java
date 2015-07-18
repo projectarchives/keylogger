@@ -45,17 +45,6 @@ public class MenuListener implements RATMenuItemActionListener {
 				frame.setLocationRelativeTo(null);
 				frame.add(panel);
 				frame.setVisible(true);
-				
-				try {
-					client.addToSendQueue(new PacketBuilder(KeyloggerPlugin.LOGS_HEADER, client) {
-						@Override
-						public void write(Client rat, DataOutputStream dos, DataInputStream dis) throws Exception {						
-							
-						}
-					});
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
