@@ -1,11 +1,12 @@
 package jrat.plugin.keylogger.client;
 
-import iconlib.IconUtils;
 import jrat.api.Plugin;
 import jrat.api.net.Packet;
 import jrat.api.ui.RATControlMenuEntry;
 import jrat.api.ui.RATMenuItem;
 import jrat.plugin.keylogger.client.ui.PanelKeylogger;
+
+import javax.swing.ImageIcon;
 
 public class KeyloggerPlugin extends Plugin {
 
@@ -18,8 +19,14 @@ public class KeyloggerPlugin extends Plugin {
 	public boolean enabled;
 
 	public KeyloggerPlugin() {
-		super("Keylogger", "1.2.1", "Keylogger Plugin", "jRAT", IconUtils.getIcon("keyboard", KeyloggerPlugin.class));
-		
+		super("Keylogger", "1.2.1", "Keylogger Plugin", "jRAT");
+
+		try {
+			icon = new ImageIcon(getResource("icons/keyboard.png"));
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
 		entry = new RATControlMenuEntry("Keylogger", icon, PanelKeylogger.class);
 		RATControlMenuEntry.addEntry(entry);
 		
