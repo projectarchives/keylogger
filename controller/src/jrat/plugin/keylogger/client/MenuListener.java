@@ -38,7 +38,7 @@ public class MenuListener implements RATMenuItemActionListener {
 				frame.setTitle("Keylogger - " + client.getIP());
 				frame.setSize(750, 400);
 				frame.setLocationRelativeTo(null);
-				frame.setIconImage(Icons.getIcon("Keylogger", "/icons/icon.png").getImage());
+				frame.setIconImage(Icons.getIcon("Keylogger", "/icons/keyboard.png").getImage());
 				frame.setLocationRelativeTo(null);
 				frame.add(panel);
 				frame.setVisible(true);
